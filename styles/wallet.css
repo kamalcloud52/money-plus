@@ -1,0 +1,4 @@
+.wallet-page { padding-top: 0 !important; }
+.wallet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.account-item { background: #f9f9f9; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; }
+.account-icon.bg-green { background-color: #2ecc71; }
