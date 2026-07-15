@@ -12,18 +12,34 @@ body {
     min-height: 100vh;
 }
 
-/* --- PERBAIKAN: Hapus max-width 400px agar mengisi layar HP --- */
+/* --- PENGATURAN UNTUK MOBILE/HP (LEBAR PENUH) --- */
 #app {
     width: 100%;
-    /* max-width: 400px;  <-- BARIS INI DIHAPUS */
     position: relative;
     min-height: 100vh;
     background-color: #f2f4f8;
 }
 
-/* --- PERBAIKAN: Tambahkan padding agar tidak terlalu mepet pinggir --- */
 .app-container {
-    padding: 20px 16px 100px 16px; 
+    padding: 20px 16px 100px 16px; /* Ruang agar konten tidak tertutup navbar */
+}
+
+/* --- PENGATURAN UNTUK LAPTOP/LAYAR LEBAR --- */
+@media (min-width: 601px) {
+    body {
+        background-color: #e5e5ea; /* Background luar sedikit lebih gelap di PC */
+    }
+    #app {
+        max-width: 420px; /* Batasi lebar aplikasi agar mirip HP */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Beri bayangan agar terlihat berdiri sendiri */
+        border-radius: 0 0 16px 16px; /* Opsional: jika ingin ujung bawah agak membulat */
+    }
+    .bottom-nav {
+        max-width: 420px; /* Batasi lebar navbar agar tidak melebar di PC */
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0 0 16px 16px; /* Jika #app dibulatkan bawah, navbar perlu dibulatkan juga */
+    }
 }
 
 /* Common Styles */
@@ -123,7 +139,6 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    /* Hapus max-width 400px agar navbar full width */
     background: #ffffff;
     display: flex;
     justify-content: space-around;
@@ -132,7 +147,6 @@ body {
     box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     height: 70px;
     z-index: 999;
-    border-radius: 16px 16px 0 0;
 }
 
 .nav-item {
@@ -142,18 +156,18 @@ body {
 .nav-item i { font-size: 20px; }
 .nav-item.active { color: #f5a623; }
 
-/* FAB - PERBAIKAN WARNA LEBIH GELAP */
+/* FAB */
 .tab-placeholder { position: relative; width: 60px; height: 100%; }
 .fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
 .fab { 
     width: 56px; 
     height: 56px; 
-    background: #f5a623; /* PERBAIKAN: Ubah dari #ffcd5c ke warna kuning yang lebih tua/gelap */
+    background: #f5a623;
     border-radius: 50%; 
     display: flex; align-items: center; justify-content: center; 
     color: white; 
     font-size: 26px; 
-    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4); /* Bayangan juga disesuaikan warnanya */
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
     border: none; cursor: pointer; transition: transform 0.1s; 
 }
 .fab:active { transform: scale(0.95); }
