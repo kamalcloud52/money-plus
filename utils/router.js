@@ -3,6 +3,7 @@ import { renderWallet } from '../pages/Wallet.js';
 import { renderGraph } from '../pages/Graph.js';
 import { renderTransaction, initTransactionLogic } from '../pages/Transaction.js';
 import { renderFinancialStatement } from '../pages/FinancialStatement.js';
+import { renderCategoryRanking, initCategoryRankingLogic } from '../pages/CategoryRanking.js';
 import { renderSettings } from '../pages/Settings.js';
 
 const routes = {
@@ -11,6 +12,7 @@ const routes = {
     'graph': renderGraph,
     'transaction': renderTransaction,
     'financial-statement': renderFinancialStatement,
+    'category-ranking': renderCategoryRanking,
     'settings': renderSettings
 };
 
@@ -20,7 +22,7 @@ export function initRouter() {
         let hash = window.location.hash.replace('#', '');
         if (!hash || !routes[hash]) {
             hash = 'home';
-        }
+        }      
 
         const renderFn = routes[hash];
         if (renderFn) {
@@ -36,6 +38,9 @@ export function initRouter() {
             // Jalankan logika khusus jika halaman adalah Transaction
             if (hash === 'transaction') {
                 initTransactionLogic();
+            }
+            if (hash === 'category-ranking') {
+                initCategoryRankingLogic();
             }
         }
 
