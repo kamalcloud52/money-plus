@@ -46,7 +46,6 @@ export function renderTransaction() {
             <div class="transaction-header">
                 <button class="back-btn"><i class="fas fa-chevron-left"></i></button>
                 <h2>Transaction</h2>
-                <div style="width: 24px;"></div>
             </div>
 
             <!-- Tab Menu -->
