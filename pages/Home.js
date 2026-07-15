@@ -20,7 +20,7 @@ export function renderHome() {
                 <div class="card-header">
                     <h3>Expense & Income</h3>
                     <!-- PERBAIKAN: Ubah div menjadi a href -->
-                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
+                    <a href="#category-ranking" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="filter-select">
                     <select><option>This Month</option></select>
