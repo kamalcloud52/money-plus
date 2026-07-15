@@ -1,0 +1,4 @@
+.financial-statement .balance { text-align: center; font-size: 24px; font-weight: 700; color: #4cd964; }
+.expense-income .filter-select select { ... } /* Hanya milik halaman Home */
+.chart-bars { ... } /* Hanya milik halaman Home */
+.transaction-item { ... }
