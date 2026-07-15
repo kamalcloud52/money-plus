@@ -1,7 +1,6 @@
 export function renderNavbar() {
     const app = document.getElementById('app');
     
-    // Sisipkan HTML Navigasi ke dalam #app
     const navbarHTML = `
         <nav class="bottom-nav" id="bottom-nav">
             <a href="#home" class="nav-item active" data-page="home">
@@ -12,7 +11,8 @@ export function renderNavbar() {
             </a>
             <div class="tab-placeholder">
                 <div class="fab-container">
-                    <button class="fab" id="add-btn"><i class="fas fa-plus"></i></button>
+                    <!-- UBAH INI: Tambahkan href="#transaction" agar klik tombol pindah halaman -->
+                    <a href="#transaction" class="fab" id="add-btn"><i class="fas fa-plus"></i></a>
                 </div>
             </div>
             <a href="#graph" class="nav-item" data-page="graph">
@@ -25,9 +25,4 @@ export function renderNavbar() {
     `;
 
     app.insertAdjacentHTML('beforeend', navbarHTML);
-
-    // Event listener untuk tombol tambah
-    document.getElementById('add-btn').addEventListener('click', () => {
-        alert('Tombol Tambah diklik!');
-    });
 }
