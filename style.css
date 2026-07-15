@@ -12,7 +12,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- PENGATURAN UNTUK MOBILE/HP --- */
+/* --- PENGATURAN MOBILE/HP (LEBAR PENUH, KOLOM TUNGGAL) --- */
 #app {
     width: 100%;
     position: relative;
@@ -20,68 +20,97 @@ body {
     background-color: #f2f4f8;
 }
 
-/* UPDATE: Padding sedikit dikecilkan agar card lebih lebar di HP */
 .app-container {
     padding: 16px 12px 100px 12px; 
 }
 
-/* --- PENGATURAN UNTUK PC/LAYAR LEBAR (GRID LAYOUT) --- */
+/* --- PENGATURAN DESKTOP/PC (LAYOUT 2 KOLOM & DITENGAHKAN) --- */
 @media (min-width: 800px) {
     body {
-        background-color: #e5e5ea; /* Background PC */
+        background-color: #e5e5ea;
     }
+    
+    /* Batasi lebar area aplikasi agar tidak menceng ke mana-mana */
     #app {
-        max-width: 1000px; /* Lebar maksimal area aplikasi di PC */
+        max-width: 850px;
+        width: 100%;
         padding: 20px;
-        height: 100vh;
+        height: auto; /* Biarkan tinggi menyesuaikan */
         display: flex;
         flex-direction: column;
+        align-items: center; /* Tengahkan elemen di dalam #app */
     }
     
-    /* Ubah container menjadi Grid 2 Kolom */
+    /* Container Card diubah menjadi Grid 2x2 yang rapi */
     .app-container {
         padding: 0;
-        margin-top: 20px;
+        margin: 20px 0 100px 0; /* Jarak atas dan bawah */
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr; /* 2 Kolom sama besar */
-        gap: 20px;
-        flex: 1;
-        padding-bottom: 100px; /* Ruang untuk navbar */
+        gap: 24px; /* Jarak antar card rapi */
     }
 
-    /* UPDATE: Membuat Navbar Floating/Melayang di PC */
+    /* Semua Card di Desktop jadi tidak punya margin antar card (diatur gap grid) */
+    .card {
+        margin-bottom: 0;
+        padding: 24px;
+        height: 100%; /* Agar tinggi card kiri dan kanan seimbang jika konten beda */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Perbaikan Layout Chart Expense & Income agar teksnya tidak berantakan */
+    .expense-income .chart-container {
+        height: 110px; /* Sedikit lebih tinggi untuk layar lebar */
+    }
+    .expense-income .chart-labels {
+        font-size: 11px;
+    }
+
+    /* UPDATE: Navbar Floating di PC */
     .bottom-nav {
         position: fixed;
-        bottom: 20px; /* Jarak dari bawah layar */
+        bottom: 25px;
         left: 50%;
         transform: translateX(-50%);
-        width: 600px; /* Lebar navbar di PC */
-        max-width: 90%; /* Responsif jika layar kecil */
-        border-radius: 50px; /* Membuat navbar membulat */
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        padding: 10px 20px 10px 20px;
-        height: 65px;
+        width: 550px;
+        max-width: 90%;
+        border-radius: 50px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        height: 68px;
+        padding: 10px 30px 10px 30px;
         background: #ffffff;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between; /* Menu menyebar rapi */
         align-items: center;
         z-index: 999;
+        border: 1px solid rgba(255,255,255,0.5);
     }
     
-    /* Card di PC akan terlihat lebih lebar */
-    .card {
-        margin-bottom: 0; /* Gap diatur oleh grid, bukan margin */
-        padding: 20px;
+    /* FAB tombol plus di Desktop */
+    .fab {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+        box-shadow: 0 6px 15px rgba(245, 166, 35, 0.4);
+        top: -20px;
+    }
+    .tab-placeholder {
+        width: 60px; 
+        height: 100%;
+    }
+    .fab-container {
+        top: -22px; /* Sesuaikan posisi FAB */
     }
 }
 
-/* Common Styles */
+/* --- STYLE UMUM (Berlaku Mobile & Desktop) --- */
 .card {
     background: #ffffff;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     display: block;
 }
 
@@ -95,7 +124,7 @@ body {
 
 .arrow-icon {
     background: #fff6e5;
-    width: 26px; height: 26px;
+    width: 28px; height: 28px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: #f5a623; font-size: 12px;
@@ -110,12 +139,13 @@ body {
 /* 1. Financial Statement */
 .financial-statement .balance {
     text-align: center;
-    font-size: 24px; font-weight: 700; color: #4cd964;
-    padding: 10px 0;
+    font-size: 28px; /* Sedikit dibesarkan */
+    font-weight: 700; color: #4cd964;
+    padding: 15px 0;
 }
 
 /* 2. Expense & Income */
-.expense-income .filter-select { text-align: center; margin-bottom: 20px; }
+.expense-income .filter-select { text-align: center; margin-bottom: 16px; }
 .expense-income .filter-select select {
     padding: 8px 36px 8px 16px;
     border: 1px solid #f5a623; border-radius: 20px;
@@ -127,22 +157,22 @@ body {
 
 .chart-container { display: flex; align-items: flex-end; gap: 12px; padding-bottom: 4px; height: 90px; }
 .chart-labels { display: flex; flex-direction: column; justify-content: space-between; height: 100%; font-size: 10px; color: #8e8e93; }
-.chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 100%; margin-right: 16px; }
+.chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 100%; margin-right: 12px; }
 .chart-bar { width: 24px; border-radius: 4px 4px 0 0; }
 .bar-income { height: 6px; background-color: #4cd964; }
 .bar-expense { height: 80px; background-color: #ff3b30; }
 
 .chart-data { flex: 1; }
-.chart-data .row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
+.chart-data .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
 .chart-data .row:last-child { border-bottom: none; }
-.chart-data .row span:first-child { color: #333; }
+.chart-data .row span:first-child { color: #555; }
 
 /* 3. Monthly Budget */
 .budget-container { display: flex; align-items: center; gap: 20px; }
 .donut-chart {
-    width: 90px; height: 90px; border-radius: 50%;
+    width: 90px; height: 90px; border-radius: 50%; flex-shrink: 0;
     background: conic-gradient(#4cd964 0% 7.2%, #e5e5ea 7.2% 100%);
-    display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; position: relative;
 }
 .donut-inner {
     width: 70px; height: 70px; background: #fff; border-radius: 50%;
@@ -166,7 +196,7 @@ body {
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
 
-/* DEFAULT MOBILE BOTTOM NAVIGATION */
+/* MOBILE NAVIGATION (DEFAULT) */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -189,7 +219,7 @@ body {
 .nav-item i { font-size: 20px; }
 .nav-item.active { color: #f5a623; }
 
-/* FAB */
+/* FAB MOBILE */
 .tab-placeholder { position: relative; width: 60px; height: 100%; }
 .fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
 .fab { 
