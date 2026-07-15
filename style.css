@@ -12,28 +12,28 @@ body {
     min-height: 100vh;
 }
 
-/* --- PENGATURAN UTAMA (MOBILE/HP & PC TETAP SATU KOLOM) --- */
+/* --- PENGATURAN UTAMA (MOBILE FULL WIDTH) --- */
 #app {
     width: 100%;
-    max-width: 480px; /* Batasi lebar maksimal agar di PC tidak melebar kemana-mana, tapi di HP pas */
+    /* max-width: 480px; <-- INI DIHAPUS. BIAR LEBAR PENUH */
     position: relative;
     min-height: 100vh;
     background-color: #f2f4f8;
 }
 
+/* PADDING KIRI KANAN DIKURANGI SEDIKIT AGAR CARD MELEBAR */
 .app-container {
-    padding: 16px 16px 100px 16px; /* Padding rapi di kiri kanan */
+    padding: 16px 8px 100px 8px; 
 }
 
-/* --- PENGATURAN NAVBAR AGAR TIDAK KEPOTONG DAN RAPI --- */
+/* --- PENGATURAN NAVBAR FULL WIDTH --- */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    max-width: 480px; /* Samakan dengan lebar #app */
-    left: 50%;
-    transform: translateX(-50%); /* Agar tetap di tengah layar PC */
+    /* max-width: 480px; <-- INI JUGA DIHAPUS */
+    /* transform: translateX(-50%); <-- INI DIHAPUS KARENA SUDAH LEFT:0 */
     
     background: #ffffff;
     display: flex;
@@ -66,14 +66,15 @@ body {
 }
 .fab:active { transform: scale(0.95); }
 
-/* --- STYLE CARD --- */
+/* --- STYLE CARD (DILEBARKAN) --- */
 .card {
     background: #ffffff;
     border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 16px; /* Padding card tetap agar isi tidak mepet ke batas card */
+    margin-bottom: 12px; /* Jarak antar card sedikit dikurangi */
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     display: block;
+    width: 100%;
 }
 
 .card-header {
