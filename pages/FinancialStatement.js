@@ -85,8 +85,8 @@ export function renderFinancialStatement() {
             
             <!-- Header -->
             <div class="fs-header">
-                <!-- Berikan ID yang mudah ditangkap oleh Router -->
-                <button class="back-btn" id="fs-back-btn"><i class="fas fa-chevron-left"></i></button>
+                <!-- UBAH INI: Ganti <button> menjadi <a href="#home"> -->
+                <a href="#home" class="back-btn"><i class="fas fa-chevron-left"></i></a>
                 <h2>Financial Statement</h2>
                 <div style="width: 24px;"></div>
             </div>
