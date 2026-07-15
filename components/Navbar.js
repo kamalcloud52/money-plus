@@ -11,8 +11,8 @@ export function renderNavbar() {
             </a>
             <div class="tab-placeholder">
                 <div class="fab-container">
-                    <!-- UBAH INI: Tambahkan href="#transaction" agar klik tombol pindah halaman -->
-                    <a href="#transaction" class="fab" id="add-btn"><i class="fas fa-plus"></i></a>
+                    <!-- Kembalikan ke BUTTON, jangan A -->
+                    <button class="fab" id="add-btn"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
             <a href="#graph" class="nav-item" data-page="graph">
@@ -25,4 +25,9 @@ export function renderNavbar() {
     `;
 
     app.insertAdjacentHTML('beforeend', navbarHTML);
+
+    // Tambahkan logika navigasi manual untuk tombol +
+    document.getElementById('add-btn').addEventListener('click', () => {
+        window.location.hash = '#transaction';
+    });
 }
