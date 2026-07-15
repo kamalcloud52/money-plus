@@ -1,0 +1,4 @@
+.graph-page { padding-top: 0 !important; }
+.graph-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.graph-card-header .graph-subtitle { color: #8e8e93; font-size: 12px; }
+.x-axis-labels { display: flex; justify-content: space-between; }
