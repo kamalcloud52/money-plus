@@ -12,105 +12,67 @@ body {
     min-height: 100vh;
 }
 
-/* --- PENGATURAN MOBILE/HP (LEBAR PENUH, KOLOM TUNGGAL) --- */
+/* --- PENGATURAN UTAMA (MOBILE/HP & PC TETAP SATU KOLOM) --- */
 #app {
     width: 100%;
+    max-width: 480px; /* Batasi lebar maksimal agar di PC tidak melebar kemana-mana, tapi di HP pas */
     position: relative;
     min-height: 100vh;
     background-color: #f2f4f8;
 }
 
 .app-container {
-    padding: 16px 12px 100px 12px; 
+    padding: 16px 16px 100px 16px; /* Padding rapi di kiri kanan */
 }
 
-/* --- PENGATURAN DESKTOP/PC (LAYOUT 2 KOLOM & DITENGAHKAN) --- */
-@media (min-width: 800px) {
-    body {
-        background-color: #e5e5ea;
-    }
+/* --- PENGATURAN NAVBAR AGAR TIDAK KEPOTONG DAN RAPI --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 480px; /* Samakan dengan lebar #app */
+    left: 50%;
+    transform: translateX(-50%); /* Agar tetap di tengah layar PC */
     
-    /* Batasi lebar area aplikasi agar tidak menceng ke mana-mana */
-    #app {
-        max-width: 850px;
-        width: 100%;
-        padding: 20px;
-        height: auto; /* Biarkan tinggi menyesuaikan */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Tengahkan elemen di dalam #app */
-    }
-    
-    /* Container Card diubah menjadi Grid 2x2 yang rapi */
-    .app-container {
-        padding: 0;
-        margin: 20px 0 100px 0; /* Jarak atas dan bawah */
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 Kolom sama besar */
-        gap: 24px; /* Jarak antar card rapi */
-    }
-
-    /* Semua Card di Desktop jadi tidak punya margin antar card (diatur gap grid) */
-    .card {
-        margin-bottom: 0;
-        padding: 24px;
-        height: 100%; /* Agar tinggi card kiri dan kanan seimbang jika konten beda */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    /* Perbaikan Layout Chart Expense & Income agar teksnya tidak berantakan */
-    .expense-income .chart-container {
-        height: 110px; /* Sedikit lebih tinggi untuk layar lebar */
-    }
-    .expense-income .chart-labels {
-        font-size: 11px;
-    }
-
-    /* UPDATE: Navbar Floating di PC */
-    .bottom-nav {
-        position: fixed;
-        bottom: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 550px;
-        max-width: 90%;
-        border-radius: 50px;
-        box-shadow: 0 6px 25px rgba(0,0,0,0.12);
-        height: 68px;
-        padding: 10px 30px 10px 30px;
-        background: #ffffff;
-        display: flex;
-        justify-content: space-between; /* Menu menyebar rapi */
-        align-items: center;
-        z-index: 999;
-        border: 1px solid rgba(255,255,255,0.5);
-    }
-    
-    /* FAB tombol plus di Desktop */
-    .fab {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
-        box-shadow: 0 6px 15px rgba(245, 166, 35, 0.4);
-        top: -20px;
-    }
-    .tab-placeholder {
-        width: 60px; 
-        height: 100%;
-    }
-    .fab-container {
-        top: -22px; /* Sesuaikan posisi FAB */
-    }
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0 20px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    height: 70px;
+    z-index: 999;
 }
 
-/* --- STYLE UMUM (Berlaku Mobile & Desktop) --- */
+.nav-item {
+    display: flex; flex-direction: column; align-items: center; color: #8e8e93;
+    font-size: 10px; gap: 4px; cursor: pointer; width: 50px; position: relative; text-decoration: none;
+}
+.nav-item i { font-size: 20px; }
+.nav-item.active { color: #f5a623; }
+
+/* FAB */
+.tab-placeholder { position: relative; width: 60px; height: 100%; }
+.fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
+.fab { 
+    width: 56px; height: 56px; 
+    background: #f5a623;
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    color: white; font-size: 26px; 
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+    border: none; cursor: pointer; transition: transform 0.1s; 
+}
+.fab:active { transform: scale(0.95); }
+
+/* --- STYLE CARD --- */
 .card {
     background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     display: block;
 }
 
@@ -139,13 +101,12 @@ body {
 /* 1. Financial Statement */
 .financial-statement .balance {
     text-align: center;
-    font-size: 28px; /* Sedikit dibesarkan */
-    font-weight: 700; color: #4cd964;
-    padding: 15px 0;
+    font-size: 24px; font-weight: 700; color: #4cd964;
+    padding: 10px 0;
 }
 
 /* 2. Expense & Income */
-.expense-income .filter-select { text-align: center; margin-bottom: 16px; }
+.expense-income .filter-select { text-align: center; margin-bottom: 20px; }
 .expense-income .filter-select select {
     padding: 8px 36px 8px 16px;
     border: 1px solid #f5a623; border-radius: 20px;
@@ -157,22 +118,22 @@ body {
 
 .chart-container { display: flex; align-items: flex-end; gap: 12px; padding-bottom: 4px; height: 90px; }
 .chart-labels { display: flex; flex-direction: column; justify-content: space-between; height: 100%; font-size: 10px; color: #8e8e93; }
-.chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 100%; margin-right: 12px; }
+.chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 100%; margin-right: 16px; }
 .chart-bar { width: 24px; border-radius: 4px 4px 0 0; }
 .bar-income { height: 6px; background-color: #4cd964; }
 .bar-expense { height: 80px; background-color: #ff3b30; }
 
 .chart-data { flex: 1; }
-.chart-data .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
+.chart-data .row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
 .chart-data .row:last-child { border-bottom: none; }
-.chart-data .row span:first-child { color: #555; }
+.chart-data .row span:first-child { color: #333; }
 
 /* 3. Monthly Budget */
 .budget-container { display: flex; align-items: center; gap: 20px; }
 .donut-chart {
-    width: 90px; height: 90px; border-radius: 50%; flex-shrink: 0;
+    width: 90px; height: 90px; border-radius: 50%;
     background: conic-gradient(#4cd964 0% 7.2%, #e5e5ea 7.2% 100%);
-    display: flex; align-items: center; justify-content: center; position: relative;
+    display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
 }
 .donut-inner {
     width: 70px; height: 70px; background: #fff; border-radius: 50%;
@@ -195,43 +156,6 @@ body {
 .trans-details h4 { font-size: 14px; color: #333; font-weight: 600; }
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
-
-/* MOBILE NAVIGATION (DEFAULT) */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #ffffff;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0 20px 0;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    height: 70px;
-    z-index: 999;
-}
-
-.nav-item {
-    display: flex; flex-direction: column; align-items: center; color: #8e8e93;
-    font-size: 10px; gap: 4px; cursor: pointer; width: 50px; position: relative; text-decoration: none;
-}
-.nav-item i { font-size: 20px; }
-.nav-item.active { color: #f5a623; }
-
-/* FAB MOBILE */
-.tab-placeholder { position: relative; width: 60px; height: 100%; }
-.fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
-.fab { 
-    width: 56px; height: 56px; 
-    background: #f5a623;
-    border-radius: 50%; 
-    display: flex; align-items: center; justify-content: center; 
-    color: white; font-size: 26px; 
-    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
-    border: none; cursor: pointer; transition: transform 0.1s; 
-}
-.fab:active { transform: scale(0.95); }
 
 .placeholder-page { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; color: #8e8e93; }
 .placeholder-page i { font-size: 50px; margin-bottom: 20px; color: #f5a623; }
