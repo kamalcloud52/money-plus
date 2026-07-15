@@ -1,0 +1,149 @@
+/* --- HALAMAN TRANSACTION --- */
+.transaction-page {
+    padding-top: 0 !important;
+    padding-bottom: 20px;
+}
+
+/* Header */
+.transaction-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0 16px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+}
+.transaction-header h2 {
+    font-size: 18px; font-weight: 700; color: #000;
+}
+.back-btn {
+    background: none; border: none; font-size: 20px; cursor: pointer;
+}
+
+/* Tabs */
+.tab-container {
+    display: flex; gap: 12px; margin-bottom: 24px;
+}
+.tab-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.tab-btn.active {
+    background: #f5a623; border-color: #f5a623; color: #fff;
+}
+
+/* Amount Input */
+.amount-input-group {
+    margin-bottom: 24px;
+    border: 1px solid #f5a623;
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+}
+.amount-input-group label {
+    position: absolute; top: -10px; left: 16px;
+    background: #fff; padding: 0 6px;
+    font-size: 12px; color: #f5a623;
+}
+.amount-wrapper {
+    display: flex; align-items: center; justify-content: space-between;
+}
+.amount-field {
+    width: 100%; border: none; font-size: 22px; outline: none; background: transparent;
+}
+.currency-label { font-size: 16px; font-weight: 600; color: #333; margin-left: 10px; }
+
+/* Form Group Select */
+.form-group.select-group {
+    display: flex; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid #eee; cursor: pointer;
+}
+.icon-box {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #8e8e93; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-right: 16px; flex-shrink: 0;
+}
+.icon-box.bg-orange { background: #f5a623; }
+.icon-box.small { width: 28px; height: 28px; font-size: 14px; background: transparent; color: #333; border: 1px solid #333; }
+
+.text-info {
+    display: flex; flex-direction: column; flex: 1;
+}
+.text-info.full-width { flex: 1; }
+.text-info .label { font-size: 14px; color: #333; margin-bottom: 4px; }
+.text-info .value { font-size: 14px; color: #333; }
+.text-info .value.placeholder { color: #ccc; }
+.text-info .desc-input { border: none; outline: none; font-size: 14px; color: #333; width: 100%; }
+
+/* Date & Time Row */
+.form-row { display: flex; gap: 16px; margin: 16px 0; border-bottom: 1px solid #eee; padding-bottom: 16px; }
+.form-group.half { flex: 1; border-bottom: none; padding: 0; }
+.value-group { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.value-group .icon-gray { color: #333; font-size: 18px; }
+.date-input { border: none; font-size: 15px; color: #333; outline: none; background: transparent; }
+.time-display { font-size: 16px; color: #333; }
+
+/* Submit Button */
+.submit-btn {
+    width: 100%; padding: 16px; margin-top: 30px;
+    background: #f5a623; color: #fff; border: none;
+    border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer;
+}
+
+/* ===== BOTTOM SHEETS (MODAL) ===== */
+.bottom-sheet-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: flex; align-items: flex-end; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.bottom-sheet-overlay.open {
+    opacity: 1; pointer-events: auto;
+}
+
+.bottom-sheet-content {
+    background: #fff; width: 100%; max-width: 480px;
+    border-radius: 20px 20px 0 0;
+    padding: 20px; padding-bottom: 40px;
+    transform: translateY(100%); transition: transform 0.3s ease;
+}
+.bottom-sheet-overlay.open .bottom-sheet-content {
+    transform: translateY(0);
+}
+.bottom-sheet-content h3 { font-size: 16px; margin-bottom: 20px; }
+
+/* List Akun (Sheet 1) */
+.list-container { display: flex; flex-direction: column; gap: 10px; }
+.list-item {
+    display: flex; align-items: center; padding: 10px;
+    background: #f9f9f9; border-radius: 10px; cursor: pointer;
+}
+.list-item .circle-icon { width: 36px; height: 36px; border-radius: 50%; margin-right: 12px; }
+.list-item .list-text { display: flex; flex-direction: column; }
+.list-item .list-text .title { font-size: 14px; color: #333; }
+.list-item .list-text .subtitle { font-size: 13px; }
+
+/* Grid Kategori (Sheet 2) */
+.grid-container {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.grid-item {
+    display: flex; flex-direction: column; align-items: center;
+    cursor: pointer; text-align: center;
+}
+.grid-item .circle-icon {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; margin-bottom: 6px;
+}
+.grid-item .label { font-size: 12px; color: #333; }
