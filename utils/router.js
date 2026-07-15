@@ -19,26 +19,27 @@ export function initRouter() {
 
         const renderFn = routes[hash];
         if (renderFn) {
-            // Cari container konten
             let container = document.querySelector('#app .app-container');
             
-            // Jika belum ada container, buat elemen barunya
+            // Jika belum ada, buat elemen barunya
             if (!container) {
                 container = document.createElement('div');
                 container.className = 'app-container';
                 document.getElementById('app').appendChild(container);
+            } else {
+                // Jika sudah ada, kosongkan dulu agar tidak menumpuk
+                container.innerHTML = '';
             }
             
             // Render HTML ke dalam container
-            container.innerHTML = renderFn();
+            container.insertAdjacentHTML('beforeend', renderFn());
         }
 
-        // Update class active pada menu navigasi
         document.querySelectorAll('.nav-item').forEach(link => {
             link.classList.toggle('active', link.dataset.page === hash);
         });
     }
 
     window.addEventListener('hashchange', navigate);
-    navigate(); // Jalankan pertama kali saat load
+    navigate();
 }
