@@ -11,9 +11,6 @@ const routes = {
 };
 
 export function initRouter() {
-    // Kita ubah target elemennya. Jangan hapus seluruh #app, tapi hapus isi .app-container saja
-    // Atau, kita render navbar terpisah dari konten.
-    
     function navigate() {
         let hash = window.location.hash.replace('#', '');
         if (!hash || !routes[hash]) {
@@ -22,24 +19,17 @@ export function initRouter() {
 
         const renderFn = routes[hash];
         if (renderFn) {
-            // CARA BARU: Render konten ke dalam .app-container yang ada di dalam #app
-            // Jika belum ada .app-container, kita buat dulu
+            // Cari container konten
             let container = document.querySelector('#app .app-container');
             
+            // Jika belum ada container, buat elemen barunya
             if (!container) {
-                // Jika belum ada container, buat elemen barunya
                 container = document.createElement('div');
                 container.className = 'app-container';
-                // Masukkan container ke app, tepat sebelum navbar (agar navbar tetap di bawah)
-                const navbar = document.querySelector('#app .bottom-nav');
-                if (navbar) {
-                    document.getElementById('app').insertBefore(container, navbar);
-                } else {
-                    document.getElementById('app').appendChild(container);
-                }
+                document.getElementById('app').appendChild(container);
             }
             
-            // Render HTML ke dalam container tanpa menghapus Navbar
+            // Render HTML ke dalam container
             container.innerHTML = renderFn();
         }
 
