@@ -33,9 +33,11 @@ export function renderTransaction() {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number).replace("Rp", "IDR");
     };
 
-    // Mengambil waktu sekarang untuk dijadikan default value input time
+    // Ambil tanggal dan jam sekarang
     const now = new Date();
-    const defaultTime = now.toTimeString().slice(0, 5); // Format HH:MM
+    const defaultDate = now.toISOString().split('T')[0]; // YYYY-MM-DD untuk input tersembunyi
+    const displayDate = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); // July 15, 2026
+    const displayTime = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }); // 13:54
 
     return `
         <div class="app-container transaction-page">
@@ -85,25 +87,27 @@ export function renderTransaction() {
                     </div>
                 </div>
 
-                <!-- Date & Time (Time otomatis jadi input type time) -->
+                <!-- Date & Time (Layout baru: Text Display, Input Tersembunyi) -->
                 <div class="form-row">
-                    <div class="form-group half">
+                    <div class="form-group half" id="day-selector">
                         <span class="label">Day</span>
                         <div class="value-group">
                             <i class="far fa-calendar-alt icon-gray"></i>
-                            <input type="date" class="date-input">
+                            <span class="date-display" id="date-text">${displayDate}</span>
+                            <input type="date" class="date-input" id="date-picker" value="${defaultDate}">
                         </div>
                     </div>
-                    <div class="form-group half">
+                    <div class="form-group half" id="time-selector">
                         <span class="label">Time</span>
                         <div class="value-group">
                             <i class="far fa-clock icon-gray"></i>
-                            <input type="time" class="time-input" value="${defaultTime}">
+                            <span class="time-display" id="time-text">${displayTime}</span>
+                            <input type="time" class="time-input" id="time-picker" value="${displayTime}">
                         </div>
                     </div>
                 </div>
 
-                <!-- Description (Layout Diperbaiki) -->
+                <!-- Description -->
                 <div class="form-group description-group">
                     <div class="desc-header">
                         <span class="label">Description</span>
@@ -160,13 +164,17 @@ export function initTransactionLogic() {
     // Tangkap Elements
     const tabs = document.querySelectorAll('.tab-btn');
     const dynamicContent = document.getElementById('dynamic-form-content');
-    const accountSelector = document.getElementById('account-selector');
-    const categorySelector = document.getElementById('category-selector');
     const accountSheet = document.getElementById('account-sheet');
     const categorySheet = document.getElementById('category-sheet');
     const submitBtn = document.querySelector('.submit-btn');
     const backBtn = document.querySelector('.back-btn');
     const amountInput = document.getElementById('amount-input');
+    const datePicker = document.getElementById('date-picker');
+    const dateText = document.getElementById('date-text');
+    const timePicker = document.getElementById('time-picker');
+    const timeText = document.getElementById('time-text');
+    const daySelector = document.getElementById('day-selector');
+    const timeSelector = document.getElementById('time-selector');
 
     // --- LOGIKA FORMAT RUPIAH & WARNA ANGKA ---
     let currentColorClass = 'text-red'; // Default (Expense)
@@ -252,7 +260,33 @@ export function initTransactionLogic() {
         });
     });
 
-    // --- LOGIKA BOTTOM SHEET (SAMA SEPERTI SEBELUMNYA) ---
+    // --- LOGIKA DAY & TIME (KLIK TEXT UNTUK BUKA PICKER) ---
+    if (datePicker && dateText) {
+        datePicker.addEventListener('change', (e) => {
+            if(e.target.value) {
+                const d = new Date(e.target.value + 'T00:00:00');
+                dateText.textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            }
+        });
+
+        daySelector.addEventListener('click', () => {
+            datePicker.showPicker ? datePicker.showPicker() : datePicker.click();
+        });
+    }
+
+    if (timePicker && timeText) {
+        timePicker.addEventListener('change', (e) => {
+            if(e.target.value) {
+                timeText.textContent = e.target.value;
+            }
+        });
+
+        timeSelector.addEventListener('click', () => {
+            timePicker.showPicker ? timePicker.showPicker() : timePicker.click();
+        });
+    }
+
+    // --- LOGIKA BOTTOM SHEET ---
     function toggleSheet(sheetElement, show) {
         if (show) {
             sheetElement.classList.add('open');
