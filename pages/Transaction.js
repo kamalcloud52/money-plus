@@ -1,4 +1,4 @@
-// Data Mockup Kategori (Sesuai Gambar 3)
+// Data Mockup Kategori
 const categories = [
     { id: 1, name: "Beauty", icon: "fa-paint-brush", color: "#e91e63" },
     { id: 2, name: "Car", icon: "fa-car", color: "#4fc3f7" },
@@ -22,7 +22,7 @@ const categories = [
     { id: 20, name: "Travel", icon: "fa-plane", color: "#26c6da" }
 ];
 
-// Data Mockup Akun (Sesuai Wallet)
+// Data Mockup Akun
 const accounts = [
     { id: 1, name: "Cash", balance: 569000, color: "#2ecc71" },
     { id: 2, name: "Mandiri", balance: 841882, color: "#3498db" }
@@ -33,6 +33,10 @@ export function renderTransaction() {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number).replace("Rp", "IDR");
     };
 
+    // Mengambil waktu sekarang untuk dijadikan default value input time
+    const now = new Date();
+    const defaultTime = now.toTimeString().slice(0, 5); // Format HH:MM
+
     return `
         <div class="app-container transaction-page">
             
@@ -40,7 +44,7 @@ export function renderTransaction() {
             <div class="transaction-header">
                 <button class="back-btn"><i class="fas fa-chevron-left"></i></button>
                 <h2>Transaction</h2>
-                <div style="width: 24px;"></div> <!-- Spacer -->
+                <div style="width: 24px;"></div>
             </div>
 
             <!-- Tab Menu -->
@@ -52,11 +56,11 @@ export function renderTransaction() {
 
             <form id="transaction-form">
                 
-                <!-- Input Amount -->
+                <!-- Input Amount (Dengan Logika Warna & Titik Otomatis) -->
                 <div class="amount-input-group">
                     <label>Amount</label>
                     <div class="amount-wrapper">
-                        <input type="number" placeholder="0" class="amount-field">
+                        <input type="text" inputmode="numeric" placeholder="0" class="amount-field" id="amount-input">
                         <span class="currency-label">IDR</span>
                     </div>
                 </div>
@@ -81,7 +85,7 @@ export function renderTransaction() {
                     </div>
                 </div>
 
-                <!-- Date & Time -->
+                <!-- Date & Time (Time otomatis jadi input type time) -->
                 <div class="form-row">
                     <div class="form-group half">
                         <span class="label">Day</span>
@@ -93,16 +97,19 @@ export function renderTransaction() {
                     <div class="form-group half">
                         <span class="label">Time</span>
                         <div class="value-group">
-                            <span class="time-display">${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}</span>
+                            <i class="far fa-clock icon-gray"></i>
+                            <input type="time" class="time-input" value="${defaultTime}">
                         </div>
                     </div>
                 </div>
 
-                <!-- Description -->
-                <div class="form-group">
-                    <div class="icon-box small"><i class="fas fa-info-circle"></i></div>
-                    <div class="text-info full-width">
+                <!-- Description (Layout Diperbaiki) -->
+                <div class="form-group description-group">
+                    <div class="desc-header">
                         <span class="label">Description</span>
+                    </div>
+                    <div class="desc-body">
+                        <div class="icon-box small"><i class="fas fa-info-circle"></i></div>
                         <input type="text" class="desc-input" placeholder="Input data...">
                     </div>
                 </div>
@@ -113,8 +120,6 @@ export function renderTransaction() {
         </div>
 
         <!-- ================= BOTTOM SHEETS (MODAL) ================= -->
-
-        <!-- 1. Bottom Sheet Accounts -->
         <div class="bottom-sheet-overlay" id="account-sheet">
             <div class="bottom-sheet-content">
                 <h3>Accounts</h3>
@@ -132,7 +137,6 @@ export function renderTransaction() {
             </div>
         </div>
 
-        <!-- 2. Bottom Sheet Categories -->
         <div class="bottom-sheet-overlay" id="category-sheet">
             <div class="bottom-sheet-content">
                 <h3>Category</h3>
@@ -151,8 +155,7 @@ export function renderTransaction() {
     `;
 }
 
-// ================= LOGIKA JAVASCRIPT UNTUK HALAMAN INI =================
-// Fungsi ini akan dipanggil oleh router setelah HTML dirender
+// ================= LOGIKA JAVASCRIPT (INTERAKSI & FORMATTING) =================
 export function initTransactionLogic() {
     // Tangkap Elements
     const tabs = document.querySelectorAll('.tab-btn');
@@ -163,16 +166,52 @@ export function initTransactionLogic() {
     const categorySheet = document.getElementById('category-sheet');
     const submitBtn = document.querySelector('.submit-btn');
     const backBtn = document.querySelector('.back-btn');
+    const amountInput = document.getElementById('amount-input');
 
-    // Logika Ganti Tab (Expense/Income vs Transfer)
+    // --- LOGIKA FORMAT RUPIAH & WARNA ANGKA ---
+    let currentColorClass = 'text-red'; // Default (Expense)
+
+    amountInput.addEventListener('input', function(e) {
+        // 1. Hapus semua karakter non-digit
+        let rawValue = this.value.replace(/\D/g, '');
+        
+        // 2. Ubah menjadi angka untuk logika
+        let numericValue = parseInt(rawValue);
+        if (isNaN(numericValue)) {
+            this.value = '';
+            return;
+        }
+
+        // 3. Format dengan titik (ribuan)
+        this.value = new Intl.NumberFormat('id-ID').format(numericValue);
+
+        // 4. Ganti warna teks berdasarkan tab yang aktif
+        this.classList.remove('text-red', 'text-green');
+        this.classList.add(currentColorClass);
+    });
+
+    // --- LOGIKA GANTI TAB (Update Warna Saat Pindah Tab) ---
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Update aktif tab
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            // Ubah Form Content
             const type = tab.dataset.tab;
+            
+            // Ubah warna default angka saat tab diganti
+            if (type === 'income') {
+                currentColorClass = 'text-green';
+            } else {
+                currentColorClass = 'text-red';
+            }
+            
+            // Update warna angka yang sudah diketik jika ada
+            if (amountInput.value.length > 0) {
+                amountInput.classList.remove('text-red', 'text-green');
+                amountInput.classList.add(currentColorClass);
+            }
+
+            // Ubah Form Content
             if (type === 'transfer') {
                 dynamicContent.innerHTML = `
                     <div class="form-group select-group" id="from-account-selector">
@@ -191,7 +230,6 @@ export function initTransactionLogic() {
                         <i class="fas fa-arrows-alt-v swap-icon"></i>
                     </div>
                 `;
-                // Hilangkan pemilih kategori saat transfer
             } else {
                 dynamicContent.innerHTML = `
                     <div class="form-group select-group" id="account-selector">
@@ -210,12 +248,11 @@ export function initTransactionLogic() {
                         </div>
                     </div>
                 `;
-                // Re-attach events jika ingin lebih kompleks (disederhanakan)
             }
         });
     });
 
-    // Fungsi untuk Membuka/Menutup Bottom Sheet
+    // --- LOGIKA BOTTOM SHEET (SAMA SEPERTI SEBELUMNYA) ---
     function toggleSheet(sheetElement, show) {
         if (show) {
             sheetElement.classList.add('open');
@@ -224,67 +261,55 @@ export function initTransactionLogic() {
         }
     }
 
-    // Event: Klik Account -> Buka Sheet Account
     document.addEventListener('click', (e) => {
         const target = e.target.closest('#account-selector, #from-account-selector, #to-account-selector');
         if (target) toggleSheet(accountSheet, true);
     });
 
-    // Event: Klik Category -> Buka Sheet Category
     document.addEventListener('click', (e) => {
         const target = e.target.closest('#category-selector');
         if (target) toggleSheet(categorySheet, true);
     });
 
-    // Event: Klik Item Account (Pilih Akun)
     document.querySelectorAll('#account-sheet .list-item').forEach(item => {
         item.addEventListener('click', () => {
-            const id = item.dataset.id;
             const name = item.dataset.name;
-            // Update tampilan selector
             const val = document.querySelector('#account-selector .value');
             if(val) {
                 val.textContent = name;
                 val.classList.remove('placeholder');
-                val.dataset.accountId = id;
             }
             toggleSheet(accountSheet, false);
         });
     });
 
-    // Event: Klik Item Category (Pilih Kategori)
     document.querySelectorAll('#category-sheet .grid-item').forEach(item => {
         item.addEventListener('click', () => {
             const name = item.dataset.name;
-            // Update tampilan selector
             const val = document.querySelector('#category-selector .value');
             if(val) {
                 val.textContent = name;
                 val.classList.remove('placeholder');
-                val.dataset.categoryId = item.dataset.id;
             }
             toggleSheet(categorySheet, false);
         });
     });
 
-    // Tutup modal jika klik overlay (background gelap)
     document.querySelectorAll('.bottom-sheet-overlay').forEach(overlay => {
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) toggleSheet(overlay, false);
         });
     });
 
-    // Tombol Kembali
     if(backBtn) {
         backBtn.addEventListener('click', () => {
             window.location.hash = '#home';
         });
     }
 
-    // Tombol Submit
     if(submitBtn) {
         submitBtn.addEventListener('click', () => {
-            alert('Transaksi berhasil disimpan! (Logika backend menyusul)');
+            alert('Transaksi berhasil disimpan!');
         });
     }
 }
