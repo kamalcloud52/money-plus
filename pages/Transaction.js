@@ -112,11 +112,11 @@ export function renderTransaction() {
                         <span class="label">Description</span>
                     </div>
                     <div class="desc-body">
-                        <div class="icon-box small"><i class="fas fa-info-circle"></i></div>
+                        <!-- Gunakan icon-plain, bukan icon-box -->
+                        <i class="fas fa-info-circle icon-plain"></i> 
                         <input type="text" class="desc-input" placeholder="Input data...">
                     </div>
                 </div>
-
                 <!-- Submit Button -->
                 <button type="button" class="submit-btn">Submit</button>
             </form>
