@@ -1,17 +1,16 @@
 import { dashboardData } from '../api/index.js';
 
 export function renderHome() {
-    // Kita bisa memanggil API di sini jika diperlukan
     const data = dashboardData; 
 
-    // Mengembalikan string HTML untuk halaman Home
     return `
-        <div class="app-container">
+        <div class="app-container home-page">
             <!-- 1. Financial Statement -->
             <div class="card financial-statement">
                 <div class="card-header">
                     <h3>Financial Statement</h3>
-                    <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+                    <!-- PERBAIKAN: Ubah div menjadi a href -->
+                    <a href="#financial-statement" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="balance">${data.balance}</div>
             </div>
@@ -20,7 +19,8 @@ export function renderHome() {
             <div class="card expense-income">
                 <div class="card-header">
                     <h3>Expense & Income</h3>
-                    <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+                    <!-- PERBAIKAN: Ubah div menjadi a href -->
+                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="filter-select">
                     <select><option>This Month</option></select>
@@ -55,7 +55,8 @@ export function renderHome() {
             <div class="card monthly-budget">
                 <div class="card-header">
                     <h3>Monthly Budget</h3>
-                    <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+                    <!-- PERBAIKAN: Ubah div menjadi a href -->
+                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="budget-container">
                     <div class="donut-chart">
@@ -85,7 +86,8 @@ export function renderHome() {
             <div class="card recent-transactions">
                 <div class="card-header">
                     <h3>Recent Transactions</h3>
-                    <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
+                    <!-- PERBAIKAN: Ubah div menjadi a href -->
+                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 ${data.transactions.map(t => `
                     <div class="transaction-item">
