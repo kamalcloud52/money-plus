@@ -1,4 +1,4 @@
-import { renderHome } from '../pages/Home.js';
+import { renderHome, initHomeLogic } from '../pages/Home.js';
 import { renderWallet } from '../pages/Wallet.js';
 import { renderGraph } from '../pages/Graph.js';
 import { renderTransaction, initTransactionLogic } from '../pages/Transaction.js';
@@ -16,13 +16,13 @@ const routes = {
     'settings': renderSettings
 };
 
+
 export function initRouter() {
-    
     function navigate() {
         let hash = window.location.hash.replace('#', '');
         if (!hash || !routes[hash]) {
             hash = 'home';
-        }      
+        }
 
         const renderFn = routes[hash];
         if (renderFn) {
@@ -35,7 +35,10 @@ export function initRouter() {
             
             container.innerHTML = renderFn();
 
-            // Jalankan logika khusus jika halaman adalah Transaction
+            // Jalankan logika khusus per halaman
+            if (hash === 'home') {
+                initHomeLogic(); // <-- TAMBAHKAN BARIS INI!
+            }
             if (hash === 'transaction') {
                 initTransactionLogic();
             }
