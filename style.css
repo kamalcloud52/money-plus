@@ -12,7 +12,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- PENGATURAN UNTUK MOBILE/HP (LEBAR PENUH) --- */
+/* --- PENGATURAN UNTUK MOBILE/HP --- */
 #app {
     width: 100%;
     position: relative;
@@ -20,25 +20,58 @@ body {
     background-color: #f2f4f8;
 }
 
+/* UPDATE: Padding sedikit dikecilkan agar card lebih lebar di HP */
 .app-container {
-    padding: 20px 16px 100px 16px; /* Ruang agar konten tidak tertutup navbar */
+    padding: 16px 12px 100px 12px; 
 }
 
-/* --- PENGATURAN UNTUK LAPTOP/LAYAR LEBAR --- */
-@media (min-width: 601px) {
+/* --- PENGATURAN UNTUK PC/LAYAR LEBAR (GRID LAYOUT) --- */
+@media (min-width: 800px) {
     body {
-        background-color: #e5e5ea; /* Background luar sedikit lebih gelap di PC */
+        background-color: #e5e5ea; /* Background PC */
     }
     #app {
-        max-width: 420px; /* Batasi lebar aplikasi agar mirip HP */
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Beri bayangan agar terlihat berdiri sendiri */
-        border-radius: 0 0 16px 16px; /* Opsional: jika ingin ujung bawah agak membulat */
+        max-width: 1000px; /* Lebar maksimal area aplikasi di PC */
+        padding: 20px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
+    
+    /* Ubah container menjadi Grid 2 Kolom */
+    .app-container {
+        padding: 0;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 Kolom sama besar */
+        gap: 20px;
+        flex: 1;
+        padding-bottom: 100px; /* Ruang untuk navbar */
+    }
+
+    /* UPDATE: Membuat Navbar Floating/Melayang di PC */
     .bottom-nav {
-        max-width: 420px; /* Batasi lebar navbar agar tidak melebar di PC */
+        position: fixed;
+        bottom: 20px; /* Jarak dari bawah layar */
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 0 0 16px 16px; /* Jika #app dibulatkan bawah, navbar perlu dibulatkan juga */
+        width: 600px; /* Lebar navbar di PC */
+        max-width: 90%; /* Responsif jika layar kecil */
+        border-radius: 50px; /* Membuat navbar membulat */
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        padding: 10px 20px 10px 20px;
+        height: 65px;
+        background: #ffffff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 999;
+    }
+    
+    /* Card di PC akan terlihat lebih lebar */
+    .card {
+        margin-bottom: 0; /* Gap diatur oleh grid, bukan margin */
+        padding: 20px;
     }
 }
 
@@ -133,7 +166,7 @@ body {
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
 
-/* BOTTOM NAVIGATION */
+/* DEFAULT MOBILE BOTTOM NAVIGATION */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -160,13 +193,11 @@ body {
 .tab-placeholder { position: relative; width: 60px; height: 100%; }
 .fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
 .fab { 
-    width: 56px; 
-    height: 56px; 
+    width: 56px; height: 56px; 
     background: #f5a623;
     border-radius: 50%; 
     display: flex; align-items: center; justify-content: center; 
-    color: white; 
-    font-size: 26px; 
+    color: white; font-size: 26px; 
     box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
     border: none; cursor: pointer; transition: transform 0.1s; 
 }
