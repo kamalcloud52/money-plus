@@ -254,3 +254,79 @@ body {
     cursor: pointer;
     padding: 4px;
 }
+
+/* --- STYLE UNTUK HALAMAN GRAPH --- */
+
+/* Hapus padding atas agar naik ke atas (seperti wallet) */
+.graph-page {
+    padding-top: 0 !important;
+}
+
+/* Header Halaman Graph */
+.graph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-top: 8px;
+}
+.graph-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+}
+.btn-date-picker {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+}
+.btn-date-picker i {
+    font-size: 18px;
+}
+
+/* Card Graph */
+.graph-card {
+    margin-bottom: 16px;
+    padding-bottom: 20px; /* Ruang ekstra di bawah untuk chart */
+}
+
+.graph-card-header {
+    margin-bottom: 16px;
+}
+.graph-card-header h3 {
+    color: #f5a623;
+    font-size: 16px;
+    font-weight: 700;
+}
+.graph-card-header .graph-subtitle {
+    color: #8e8e93;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Pembungkus Chart agar responsif */
+.chart-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Label Sumbu X untuk Line Chart (dilakukan manual agar selaras) */
+.x-axis-labels {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 50px; /* Padding kiri menyesuaikan label Y chart */
+    margin-top: -5px;
+}
+.x-axis-labels span {
+    font-size: 10px;
+    color: #888;
+}
