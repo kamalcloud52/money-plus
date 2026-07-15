@@ -1,7 +1,9 @@
-/* --- HALAMAN TRANSACTION --- */
+/* --- HALAMAN TRANSACTION (BACKGROUND PUTIH) --- */
 .transaction-page {
     padding-top: 0 !important;
     padding-bottom: 20px;
+    background-color: #ffffff; /* BACKGROUND PUTIH BERSIH */
+    min-height: 100vh;
 }
 
 /* Header */
@@ -10,24 +12,26 @@
     justify-content: space-between;
     align-items: center;
     padding: 16px 0 16px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0f0f0;
     margin-bottom: 16px;
+    background: #ffffff;
 }
 .transaction-header h2 {
     font-size: 18px; font-weight: 700; color: #000;
 }
 .back-btn {
-    background: none; border: none; font-size: 20px; cursor: pointer;
+    background: none; border: none; font-size: 20px; cursor: pointer; color: #000;
 }
 
 /* Tabs */
 .tab-container {
     display: flex; gap: 12px; margin-bottom: 24px;
+    background: #ffffff;
 }
 .tab-btn {
     flex: 1;
     padding: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 20px;
     background: #fff;
     color: #333;
@@ -47,6 +51,7 @@
     border-radius: 12px;
     padding: 16px;
     position: relative;
+    background: #fff;
 }
 .amount-input-group label {
     position: absolute; top: -10px; left: 16px;
@@ -59,14 +64,14 @@
 .amount-field {
     width: 100%; border: none; font-size: 22px; outline: none; background: transparent;
 }
-.amount-field.text-red { color: #ff3b30; } /* Warna merah untuk Expense */
-.amount-field.text-green { color: #4cd964; } /* Warna hijau untuk Income */
+.amount-field.text-red { color: #ff3b30; }
+.amount-field.text-green { color: #4cd964; }
 .currency-label { font-size: 16px; font-weight: 600; color: #333; margin-left: 10px; }
 
 /* Form Group Select */
 .form-group.select-group {
     display: flex; align-items: center;
-    padding: 16px 0; border-bottom: 1px solid #eee; cursor: pointer;
+    padding: 16px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer;
 }
 .icon-box {
     width: 40px; height: 40px; border-radius: 50%;
@@ -85,45 +90,67 @@
 .text-info {
     display: flex; flex-direction: column; flex: 1;
 }
-.text-info.full-width { flex: 1; }
 .text-info .label { font-size: 14px; color: #333; margin-bottom: 4px; }
 .text-info .value { font-size: 14px; color: #333; }
 .text-info .value.placeholder { color: #ccc; }
-.text-info .desc-input { border: none; outline: none; font-size: 14px; color: #333; width: 100%; background: transparent; }
 
-/* Date & Time Row - Perbaikan untuk Input Time */
-.form-row { display: flex; gap: 16px; margin: 16px 0; border-bottom: 1px solid #eee; padding-bottom: 16px; }
-.form-group.half { flex: 1; border-bottom: none; padding: 0; }
-.value-group { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
-.value-group .icon-gray { color: #333; font-size: 18px; }
-.date-input, .time-input { 
-    border: none; font-size: 15px; color: #333; outline: none; background: transparent; width: 100%;
+/* --- PERBAIKAN LAYOUT DAY & TIME (Sesuai Gambar) --- */
+.form-row { 
+    display: flex; 
+    gap: 0; /* Hapus gap */
+    margin: 16px 0; 
+    border-bottom: 1px solid #f0f0f0; 
+    padding-bottom: 16px;
+    background: #fff;
 }
-/* Memastikan input date/time tidak memiliki border aneh di HP */
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator {
-    opacity: 0.5; padding: 0; margin-left: -5px; cursor: pointer;
-}
-
-/* ===== DESKRIPSI (Layout Baru Sesuai Gambar) ===== */
-.description-group {
+.form-group.half { 
+    flex: 1; 
     display: flex;
     flex-direction: column;
+    border-bottom: none; 
+    padding: 0;
+}
+.form-group.half:first-child {
+    border-right: 1px solid #f0f0f0; /* Garis pemisah vertikal di tengah */
+    padding-right: 16px;
+}
+.form-group.half:last-child {
+    padding-left: 16px;
+}
+
+.value-group { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    margin-top: 8px; 
+}
+.value-group .icon-gray { 
+    color: #333; 
+    font-size: 20px; 
+}
+.date-display, .time-display { 
+    font-size: 16px; 
+    font-weight: 500;
+    color: #000; 
+}
+
+/* Sembunyikan input asli date/time, kita hanya pakai text display-nya */
+.date-input, .time-input {
+    display: none; 
+}
+
+/* --- DESKRIPSI --- */
+.description-group {
+    display: flex; flex-direction: column;
     padding: 12px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
 }
-.description-group .desc-header {
-    margin-bottom: 8px;
-}
-.description-group .label {
-    font-size: 14px; color: #333;
-}
-.description-group .desc-body {
-    display: flex;
-    align-items: center;
-}
+.description-group .desc-header { margin-bottom: 8px; }
+.description-group .label { font-size: 14px; color: #333; }
+.description-group .desc-body { display: flex; align-items: center; }
 .description-group .desc-input {
-    border: none; outline: none; font-size: 14px; color: #333; width: 100%;
+    border: none; outline: none; font-size: 14px; color: #333; width: 100%; background: transparent;
 }
 .description-group .desc-input::placeholder { color: #ccc; }
 
@@ -134,7 +161,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer;
 }
 
-/* ===== BOTTOM SHEETS (MODAL) ===== */
+/* ===== BOTTOM SHEETS ===== */
 .bottom-sheet-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.5);
@@ -145,7 +172,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .bottom-sheet-overlay.open {
     opacity: 1; pointer-events: auto;
 }
-
 .bottom-sheet-content {
     background: #fff; width: 100%; max-width: 480px;
     border-radius: 20px 20px 0 0;
@@ -157,7 +183,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 .bottom-sheet-content h3 { font-size: 16px; margin-bottom: 20px; }
 
-/* List Akun (Sheet 1) */
+/* List Akun */
 .list-container { display: flex; flex-direction: column; gap: 10px; }
 .list-item {
     display: flex; align-items: center; padding: 10px;
@@ -168,7 +194,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .list-item .list-text .title { font-size: 14px; color: #333; }
 .list-item .list-text .subtitle { font-size: 13px; }
 
-/* Grid Kategori (Sheet 2) */
+/* Grid Kategori */
 .grid-container {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
 }
