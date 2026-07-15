@@ -164,13 +164,18 @@ body {
 
 /* --- STYLE UNTUK HALAMAN WALLET --- */
 
+/* KHUSUS UNTUK HALAMAN WALLET: Hapus padding atas agar naik ke atas */
+.wallet-page {
+    padding-top: 0 !important; 
+}
+
 /* Header Halaman Accounts */
 .wallet-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding-top: 10px;
+    padding-top: 8px; /* Beri jarak sedikit saja dari atas layar (8px) */
 }
 .wallet-header h2 {
     font-size: 18px;
@@ -187,7 +192,7 @@ body {
 
 /* Ringkasan Saldo (Financial Statement) */
 .wallet-summary {
-    border: 1px solid #f5a623; /* Border kuning seperti gambar */
+    border: 1px solid #f5a623;
     border-radius: 12px;
     padding: 14px 16px;
     margin-bottom: 16px;
@@ -205,7 +210,7 @@ body {
 
 /* List Item Akun */
 .account-item {
-    background: #f9f9f9; /* Background abu-abu muda */
+    background: #f9f9f9;
     border-radius: 12px;
     padding: 14px 16px;
     margin-bottom: 12px;
@@ -223,8 +228,8 @@ body {
     flex-shrink: 0;
     margin-right: 14px;
 }
-.account-icon.bg-green { background-color: #2ecc71; } /* Warna hijau untuk Cash */
-.account-icon.bg-blue  { background-color: #3498db; } /* Warna biru untuk Mandiri */
+.account-icon.bg-green { background-color: #2ecc71; }
+.account-icon.bg-blue  { background-color: #3498db; }
 
 .account-details {
     flex: 1;
