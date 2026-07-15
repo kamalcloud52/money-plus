@@ -5,17 +5,33 @@
     padding: 10px 0;
 }
 
-/* Expense & Income */
-.expense-income .filter-select { text-align: center; margin-bottom: 20px; }
-.expense-income .filter-select select {
-    padding: 8px 36px 8px 16px;
-    border: 1px solid #f5a623; border-radius: 20px;
-    color: #333; font-size: 14px; background: #fff; outline: none;
-    appearance: none; -webkit-appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f5a623' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; cursor: pointer;
+/* --- TOMBOL FILTER THIS MONTH DI HOME (DIPERBAIKI) --- */
+.filter-select {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Ganti select asli dengan div tombol yang memiliki border kuning */
+.home-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid #f5a623; /* Kembalikan border kuning */
+    border-radius: 20px;
+    background: #ffffff;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+.home-filter-btn i {
+    font-size: 12px;
+    color: #f5a623;
+}
+
+/* Expense & Income Chart */
 .chart-container { display: flex; align-items: flex-end; gap: 12px; padding-bottom: 4px; height: 90px; }
 .chart-labels { display: flex; flex-direction: column; justify-content: space-between; height: 100%; font-size: 10px; color: #8e8e93; }
 .chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 100%; margin-right: 16px; }
@@ -57,7 +73,10 @@
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
 
+
+/* ========================================================= */
 /* --- BOTTOM SHEET UNTUK HOME (THIS MONTH) --- */
+/* ========================================================= */
 .home-time-sheet .bottom-sheet-content {
     background: #fff; 
     width: 100%; 
