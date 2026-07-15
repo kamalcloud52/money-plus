@@ -21,18 +21,13 @@ export function initRouter() {
         if (renderFn) {
             let container = document.querySelector('#app .app-container');
             
-            // Jika belum ada, buat elemen barunya
             if (!container) {
                 container = document.createElement('div');
                 container.className = 'app-container';
                 document.getElementById('app').appendChild(container);
-            } else {
-                // Jika sudah ada, kosongkan dulu agar tidak menumpuk
-                container.innerHTML = '';
             }
             
-            // Render HTML ke dalam container
-            container.insertAdjacentHTML('beforeend', renderFn());
+            container.innerHTML = renderFn();
         }
 
         document.querySelectorAll('.nav-item').forEach(link => {
