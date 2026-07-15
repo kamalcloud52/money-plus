@@ -1,11 +1,11 @@
 export function renderWallet() {
-    // Data Mockup untuk Wallet (bisa diambil dari API nanti)
+    // Data Mockup untuk Wallet
     const accounts = [
         { name: "Cash", balance: 569000, color: "bg-green" },
         { name: "Mandiri", balance: 841882, color: "bg-blue" }
     ];
 
-    // Fungsi pembantu untuk format Rupiah (tanpa .00 di belakang)
+    // Fungsi pembantu untuk format Rupiah
     const formatRupiah = (number) => {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
@@ -14,10 +14,10 @@ export function renderWallet() {
         }).format(number).replace("Rp", "IDR");
     };
 
-    // Hitung total saldo
     const totalBalance = accounts.reduce((acc, curr) => acc + curr.balance, 0);
 
     return `
+        <!-- PERHATIKAN: saya menambahkan class 'wallet-page' di sini -->
         <div class="app-container wallet-page">
             
             <!-- Header Halaman -->
@@ -26,7 +26,7 @@ export function renderWallet() {
                 <button class="btn-add-account"><i class="fas fa-plus"></i></button>
             </div>
 
-            <!-- Ringkasan Saldo (Financial Statement) -->
+            <!-- Ringkasan Saldo -->
             <div class="card wallet-summary">
                 <div class="summary-row">
                     <span>Financial Statement:</span>
