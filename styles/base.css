@@ -16,15 +16,21 @@ body {
     width: 100%;
     position: relative;
     min-height: 100vh;
-    background-color: #f2f4f8;
+    background-color: #ffffff; /* Base putih, tapi ditimpa Home */
 }
 
-/* Global Container yang dipakai semua halaman */
+/* Global Container */
 .app-container {
     padding: 16px 8px 100px 8px;
 }
 
-/* Global Styles untuk Card */
+/* KHUSUS UNTUK HALAMAN HOME (Kembalikan background abu-abu) */
+.home-page {
+    background-color: #f2f4f8; 
+    min-height: 100vh;
+}
+
+/* Global Styles Card */
 .card {
     background: #ffffff;
     border-radius: 12px;
@@ -43,17 +49,19 @@ body {
 }
 .card-header h3 { color: #f5a623; font-size: 15px; font-weight: 700; }
 
+/* ========================================================== */
+/* PERBAIKAN UTAMA: HAPUS GARIS BAWAH PADA TOMBOL PANAH & NAV */
+/* ========================================================== */
+
 .arrow-icon {
     background: #fff6e5;
     width: 28px; height: 28px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: #f5a623; font-size: 12px;
-    text-decoration: none !important;
-    cursor: pointer;
+    text-decoration: none; /* Menghilangkan garis bawah */
 }
 
-/* Warna Text Global */
 .text-green { color: #4cd964; }
 .text-red { color: #ff3b30; }
 .text-gray { color: #8e8e93; }
@@ -77,13 +85,21 @@ body {
 }
 
 .nav-item {
-    display: flex; flex-direction: column; align-items: center; color: #8e8e93;
-    font-size: 10px; gap: 4px; cursor: pointer; width: 50px; position: relative; text-decoration: none;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    color: #8e8e93;
+    font-size: 10px; 
+    gap: 4px; 
+    cursor: pointer; 
+    width: 50px; 
+    position: relative; 
+    text-decoration: none; /* Menghilangkan garis bawah pada navbar */
 }
 .nav-item i { font-size: 20px; }
 .nav-item.active { color: #f5a623; }
 
-/* FAB (Tombol Plus Tengah) */
+/* FAB */
 .tab-placeholder { position: relative; width: 60px; height: 100%; }
 .fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
 .fab { 
@@ -97,7 +113,7 @@ body {
 }
 .fab:active { transform: scale(0.95); }
 
-/* Placeholder jika halaman belum dibuat */
+/* Placeholder halaman lain */
 .placeholder-page { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; color: #8e8e93; }
 .placeholder-page i { font-size: 50px; margin-bottom: 20px; color: #f5a623; }
 .placeholder-page h2 { font-size: 20px; margin-bottom: 10px; }
