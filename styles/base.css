@@ -1,0 +1,15 @@
+/* Reset & Warna Dasar */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background: #f2f4f8; display: flex; justify-content: center; min-height: 100vh; }
+#app { width: 100%; position: relative; background: #f2f4f8; }
+.app-container { padding: 16px 8px 100px 8px; }
+
+/* Style Global untuk Card */
+.card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+.text-green { color: #4cd964; }
+.text-red { color: #ff3b30; }
+
+/* Navbar (Full) */
+.bottom-nav { ... (salip kode navbar Anda dari style.css yang lama) ... }
+.nav-item { ... }
+.fab { ... }
