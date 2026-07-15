@@ -9,20 +9,21 @@ body {
     background-color: #f2f4f8;
     display: flex;
     justify-content: center;
-    min-height: 100vh; /* Agar body memenuhi layar */
+    min-height: 100vh;
 }
 
-/* --- PERBAIKAN UTAMA DISINI --- */
+/* --- PERBAIKAN: Hapus max-width 400px agar mengisi layar HP --- */
 #app {
     width: 100%;
-    max-width: 400px; /* Batasi lebar maksimal agar tidak mepet kiri kanan */
-    position: relative; /* Agar navbar bisa diposisikan absolute di dalamnya */
+    /* max-width: 400px;  <-- BARIS INI DIHAPUS */
+    position: relative;
     min-height: 100vh;
-    background-color: #f2f4f8; /* Warna background aplikasi */
+    background-color: #f2f4f8;
 }
 
+/* --- PERBAIKAN: Tambahkan padding agar tidak terlalu mepet pinggir --- */
 .app-container {
-    padding: 20px 16px 100px 16px; /* Tambahkan padding bottom agar konten tidak tertutup navbar */
+    padding: 20px 16px 100px 16px; 
 }
 
 /* Common Styles */
@@ -30,7 +31,7 @@ body {
     background: #ffffff;
     border-radius: 12px;
     padding: 16px;
-    margin-bottom: 16px; /* Dikurangi sedikit jaraknya */
+    margin-bottom: 16px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     display: block;
 }
@@ -116,18 +117,13 @@ body {
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
 
-/* --- PERBAIKAN NAVBAR --- */
+/* BOTTOM NAVIGATION */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    /* Agar posisinya tidak melebar kemana-mana, kita batasi juga */
-    max-width: 400px; 
-    /* PENTING: Biarkan left:50% dan transform untuk memposisikan di tengah layar */
-    left: 50%;
-    transform: translateX(-50%);
-    
+    /* Hapus max-width 400px agar navbar full width */
     background: #ffffff;
     display: flex;
     justify-content: space-around;
@@ -135,7 +131,7 @@ body {
     padding: 10px 0 20px 0;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     height: 70px;
-    z-index: 999; /* Pastikan selalu di atas konten */
+    z-index: 999;
     border-radius: 16px 16px 0 0;
 }
 
@@ -146,10 +142,20 @@ body {
 .nav-item i { font-size: 20px; }
 .nav-item.active { color: #f5a623; }
 
-/* FAB */
+/* FAB - PERBAIKAN WARNA LEBIH GELAP */
 .tab-placeholder { position: relative; width: 60px; height: 100%; }
 .fab-container { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; }
-.fab { width: 56px; height: 56px; background: #ffcd5c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; box-shadow: 0 4px 12px rgba(255, 205, 92, 0.4); border: none; cursor: pointer; transition: transform 0.1s; }
+.fab { 
+    width: 56px; 
+    height: 56px; 
+    background: #f5a623; /* PERBAIKAN: Ubah dari #ffcd5c ke warna kuning yang lebih tua/gelap */
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    color: white; 
+    font-size: 26px; 
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4); /* Bayangan juga disesuaikan warnanya */
+    border: none; cursor: pointer; transition: transform 0.1s; 
+}
 .fab:active { transform: scale(0.95); }
 
 .placeholder-page { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; color: #8e8e93; }
