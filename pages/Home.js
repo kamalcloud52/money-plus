@@ -9,22 +9,26 @@ export function renderHome() {
             <div class="card financial-statement">
                 <div class="card-header">
                     <h3>Financial Statement</h3>
-                    <!-- PERBAIKAN: Ubah div menjadi a href -->
                     <a href="#financial-statement" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="balance">${data.balance}</div>
             </div>
 
-            <!-- 2. Expense & Income -->
+            <!-- 2. Expense & Income (DENGAN TOMBOL THIS MONTH INTERAKTIF) -->
             <div class="card expense-income">
                 <div class="card-header">
                     <h3>Expense & Income</h3>
-                    <!-- PERBAIKAN: Ubah div menjadi a href -->
                     <a href="#category-ranking" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="filter-select">
-                    <select><option>This Month</option></select>
+                
+                <!-- TOMBOL INI DIBUAT BISA DIKLIK -->
+                <div class="filter-select" id="home-time-selector">
+                    <div class="home-filter-btn">
+                        <span id="home-time-text">This Month</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
+
                 <div class="chart-container">
                     <div class="chart-labels">
                         <span>IDR30L</span>
@@ -55,7 +59,6 @@ export function renderHome() {
             <div class="card monthly-budget">
                 <div class="card-header">
                     <h3>Monthly Budget</h3>
-                    <!-- PERBAIKAN: Ubah div menjadi a href -->
                     <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="budget-container">
@@ -86,7 +89,6 @@ export function renderHome() {
             <div class="card recent-transactions">
                 <div class="card-header">
                     <h3>Recent Transactions</h3>
-                    <!-- PERBAIKAN: Ubah div menjadi a href -->
                     <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 ${data.transactions.map(t => `
@@ -101,5 +103,64 @@ export function renderHome() {
                 `).join('')}
             </div>
         </div>
+
+        <!-- ===== BOTTOM SHEET HOME (THIS MONTH) ===== -->
+        <div class="bottom-sheet-overlay home-time-sheet" id="home-time-sheet">
+            <div class="bottom-sheet-content">
+                <h3>Select Time</h3>
+                <div class="list-container">
+                    <div class="list-item" data-time="Today">Today</div>
+                    <div class="list-item" data-time="This Week">This Week</div>
+                    <div class="list-item active-item" data-time="This Month">This Month <i class="fas fa-check"></i></div>
+                    <div class="list-item" data-time="This Year">This Year</div>
+                </div>
+            </div>
+        </div>
     `;
+}
+
+// ============================
+// LOGIKA JAVASCRIPT INTERAKTIF (UNTUK HALAMAN HOME)
+// ============================
+// Fungsi ini akan dipanggil oleh Router saat halaman Home di-render
+export function initHomeLogic() {
+    const timeSelector = document.getElementById('home-time-selector');
+    const timeSheet = document.getElementById('home-time-sheet');
+    const timeText = document.getElementById('home-time-text');
+
+    if (!timeSelector || !timeSheet) return;
+
+    // Fungsi Buka/Tutup Sheet
+    const toggleSheet = (show) => {
+        if (show) {
+            timeSheet.classList.add('open');
+        } else {
+            timeSheet.classList.remove('open');
+        }
+    };
+
+    // 1. Buka sheet saat tombol diklik
+    timeSelector.addEventListener('click', () => toggleSheet(true));
+
+    // 2. Tutup sheet saat klik area gelap
+    timeSheet.addEventListener('click', (e) => {
+        if (e.target === timeSheet) toggleSheet(false);
+    });
+
+    // 3. Pilih item menu
+    timeSheet.querySelectorAll('.list-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const txt = item.dataset.time;
+            
+            // Update tampilan aktif (centang)
+            timeSheet.querySelector('.active-item')?.classList.remove('active-item');
+            item.classList.add('active-item');
+            
+            // Update teks tombol di Home
+            timeText.textContent = txt;
+            
+            // Tutup sheet
+            toggleSheet(false);
+        });
+    });
 }
