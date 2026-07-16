@@ -10,7 +10,7 @@
     width: 100%;
 }
 
-/* --- PERBAIKAN HEADER (AGAR THIS MONTH DI TENGAH) --- */
+/* --- HEADER --- */
 .cr-header-top {
     display: flex;
     justify-content: space-between;
@@ -20,8 +20,6 @@
     margin-bottom: 16px;
     background: #fff;
 }
-
-/* Kolom Kiri: Tombol Back */
 .cr-header-top .back-btn {
     background: none; 
     border: none; 
@@ -29,14 +27,12 @@
     cursor: pointer; 
     color: #000; 
     padding: 0;
-    width: 24px; /* Lebar tetap agar seimbang */
+    width: 24px;
 }
-
-/* Kolom Tengah: This Month */
 .cr-center-actions {
     display: flex;
-    justify-content: center; /* Memaksa elemen ini berada di tengah */
-    flex: 1; /* Mengisi sisa ruang kosong */
+    justify-content: center;
+    flex: 1;
 }
 .cr-time-selector {
     display: flex; 
@@ -54,8 +50,6 @@
     font-size: 11px; 
     color: #f5a623; 
 }
-
-/* Kolom Kanan: Ikon Kalender */
 .cr-header-top .cr-calendar-btn {
     background: none; 
     border: none; 
@@ -63,7 +57,7 @@
     cursor: pointer; 
     color: #000; 
     padding: 0;
-    width: 24px; /* Lebar tetap agar seimbang */
+    width: 24px;
     text-align: right;
 }
 
@@ -117,7 +111,6 @@
 
 /* --- BOTTOM SHEET LIST ITEM --- */
 .list-container { display: flex; flex-direction: column; }
-
 .list-item {
     display: flex; 
     align-items: center; 
@@ -129,38 +122,20 @@
 }
 .list-item:last-child { border-bottom: none; }
 
-/* --- PERBAIKAN LOGIKA CENTANG --- */
-/* 1. Secara default, semua centang DISEMBUNYIKAN */
+/* LOGIKA CENTANG (Opacity) */
 .list-item i {
-    display: none !important; 
     color: #f5a623; 
     font-size: 18px; 
+    opacity: 0; /* Default hilang */
+    transition: opacity 0.2s ease;
 }
-
-/* 2. Hanya item yang memiliki class 'active-item' yang centangnya MUNCUL */
 .list-item.active-item {
     font-weight: 600; 
     color: #000; 
 }
 .list-item.active-item i {
-    display: block !important;
+    opacity: 1; /* Muncul saat aktif */
 }
-
-/* --- GANTI BAGIAN INI --- */
-.list-container { display: flex; flex-direction: column; }
-.list-item {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    padding: 16px 0; 
-    border-bottom: 1px solid #f0f0f0; /* Garis pemisah tipis */
-    cursor: pointer;
-    background: transparent; /* Tidak ada background abu-abu */
-}
-.list-item:last-child { border-bottom: none; }
-.list-item.active-item { font-weight: 600; color: #000; }
-.list-item.active-item i { display: block !important; }
-.list-item i { display: none; color: #f5a623; font-size: 18px; }
 
 /* --- MONTH LIST CALENDAR --- */
 .month-row {
@@ -171,3 +146,23 @@
 .month-values { font-size: 14px; font-weight: 500; }
 .month-values .text-green { color: #4cd964; }
 .month-values .text-red { color: #ff3b30; }
+
+/* --- OVERLAY & CONTAINER --- */
+.bottom-sheet-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: flex; align-items: flex-end; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.bottom-sheet-overlay.open {
+    opacity: 1; pointer-events: auto;
+}
+.bottom-sheet-content {
+    background: #fff; width: 100%; max-width: 480px;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 40px 20px;
+    transform: translateY(100%); transition: transform 0.3s ease;
+}
+.bottom-sheet-overlay.open .bottom-sheet-content { transform: translateY(0); }
+.bottom-sheet-content h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
