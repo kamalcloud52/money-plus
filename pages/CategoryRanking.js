@@ -84,19 +84,23 @@ export function renderCategoryRanking() {
     return `
         <div class="app-container category-ranking-page">
             
-            <!-- Header -->
+            <!-- Header (Struktur 3 Kolom: Kiri, Tengah, Kanan) -->
             <div class="cr-header-top">
+                <!-- KIRI: Back Button -->
                 <button class="back-btn" id="cr-back-btn"><i class="fas fa-chevron-left"></i></button>
                 
+                <!-- TENGAH: Time Selector -->
                 <div class="cr-center-actions">
                     <div class="cr-time-selector" id="cr-time-picker">
                         <span>This Month</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <button class="cr-calendar-btn" id="cr-calendar-btn">
-                        <i class="far fa-calendar-alt"></i>
-                    </button>
                 </div>
+
+                <!-- KANAN: Calendar Icon -->
+                <button class="cr-calendar-btn" id="cr-calendar-btn">
+                    <i class="far fa-calendar-alt"></i>
+                </button>
             </div>
 
             <!-- Tabs -->
