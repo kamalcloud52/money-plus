@@ -119,7 +119,7 @@ export function renderHome() {
 }
 
 // ============================
-// LOGIKA JAVASCRIPT INTERAKTIF (UNTUK HALAMAN HOME)
+// LOGIKA JAVASCRIPT INTERAKTIF
 // ============================
 export function initHomeLogic() {
     const timeSelector = document.getElementById('home-time-selector');
@@ -128,7 +128,6 @@ export function initHomeLogic() {
 
     if (!timeSelector || !timeSheet) return;
 
-    // Fungsi Buka/Tutup Sheet
     const toggleSheet = (show) => {
         if (show) {
             timeSheet.classList.add('open');
@@ -137,31 +136,30 @@ export function initHomeLogic() {
         }
     };
 
-    // 1. Buka sheet saat tombol diklik
     timeSelector.addEventListener('click', () => toggleSheet(true));
 
-    // 2. Tutup sheet saat klik area gelap
     timeSheet.addEventListener('click', (e) => {
         if (e.target === timeSheet) toggleSheet(false);
     });
 
-    // 3. Pilih item menu (LOGIKA CENTANG DIPERBAIKI)
+    // --- PERBAIKAN LOGIKA PILIHAN ---
     timeSheet.querySelectorAll('.list-item').forEach(item => {
         item.addEventListener('click', () => {
             const txt = item.dataset.time;
             
-            // Hapus class active-item dari semua item (agar centang yang lama hilang)
+            // 1. Logika Hapus Class (untuk memastikan tidak ada class aktif ganda)
             timeSheet.querySelectorAll('.list-item').forEach(el => {
                 el.classList.remove('active-item');
             });
             
-            // Tambahkan class active-item ke item yang baru diklik
+            // 2. Tambahkan Class ke item yang baru diklik.
+            // KITA PASTIKAN ITEM INI BENAR-BENAR DAPAT CLASS NYA
             item.classList.add('active-item');
-            
-            // Update teks tombol di Home
+
+            // 3. Update teks tombol
             timeText.textContent = txt;
             
-            // Tutup sheet
+            // 4. Tutup
             toggleSheet(false);
         });
     });
