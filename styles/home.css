@@ -5,20 +5,19 @@
     padding: 10px 0;
 }
 
-/* --- TOMBOL FILTER THIS MONTH DI HOME (DIPERBAIKI) --- */
+/* --- TOMBOL FILTER THIS MONTH DI HOME --- */
 .filter-select {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Ganti select asli dengan div tombol yang memiliki border kuning */
 .home-filter-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     padding: 6px 16px;
-    border: 1px solid #f5a623; /* Kembalikan border kuning */
+    border: 1px solid #f5a623;
     border-radius: 20px;
     background: #ffffff;
     color: #000;
@@ -73,7 +72,10 @@
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
 
+
+/* ========================================================= */
 /* --- BOTTOM SHEET UNTUK HOME (THIS MONTH) --- */
+/* ========================================================= */
 .home-time-sheet .bottom-sheet-content {
     background: #fff; 
     width: 100%; 
@@ -100,12 +102,11 @@
 }
 .home-time-sheet .list-item:last-child { border-bottom: none; }
 
-/* LOGIKA CENTANG YANG BENAR (TANPA !important) */
+/* LOGIKA CENTANG (Opacity) */
 .home-time-sheet .list-item i {
     color: #f5a623; 
     font-size: 18px; 
-    /* Default HILANG: Kita atur opacity 0 dan posisi absolute agar tidak merusak layout */
-    opacity: 0; 
+    opacity: 0; /* Default hilang */
     transition: opacity 0.2s ease;
 }
 .home-time-sheet .list-item.active-item {
@@ -113,49 +114,5 @@
     color: #000; 
 }
 .home-time-sheet .list-item.active-item i {
-    /* Saat aktif, munculkan */
-    opacity: 1; 
-}
-
-/* --- PERBAIKAN LOGIKA CENTANG --- */
-/* 1. Secara default, semua centang DISEMBUNYIKAN */
-.home-time-sheet .list-item i {
-    display: none !important; 
-    color: #f5a623; 
-    font-size: 18px; 
-}
-
-/* 2. Hanya item yang memiliki class 'active-item' yang centangnya MUNCUL */
-.home-time-sheet .list-item.active-item {
-    font-weight: 600; 
-    color: #000; 
-}
-.home-time-sheet .list-item.active-item i {
-    display: block !important;
-}
-
-/* Hapus background abu-abu, cukup gunakan padding dan border */
-.home-time-sheet .list-item {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    padding: 16px 0; 
-    border-bottom: 1px solid #f0f0f0; /* Garis pemisah tipis */
-    cursor: pointer;
-    background: transparent; /* Tidak ada background */
-}
-.home-time-sheet .list-item:last-child { 
-    border-bottom: none; /* Item terakhir tidak punya garis bawah */
-}
-.home-time-sheet .list-item.active-item { 
-    font-weight: 600; 
-    color: #000; 
-}
-.home-time-sheet .list-item.active-item i { 
-    display: block !important; /* Tampilkan centang jika aktif */
-}
-.home-time-sheet .list-item i { 
-    display: none; /* Sembunyikan centang jika tidak aktif */
-    color: #f5a623; 
-    font-size: 18px; 
+    opacity: 1; /* Muncul saat aktif */
 }
