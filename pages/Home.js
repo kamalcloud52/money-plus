@@ -14,14 +14,13 @@ export function renderHome() {
                 <div class="balance">${data.balance}</div>
             </div>
 
-            <!-- 2. Expense & Income (DENGAN TOMBOL THIS MONTH INTERAKTIF) -->
+            <!-- 2. Expense & Income -->
             <div class="card expense-income">
                 <div class="card-header">
                     <h3>Expense & Income</h3>
                     <a href="#category-ranking" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 
-                <!-- TOMBOL INI DIBUAT BISA DIKLIK -->
                 <div class="filter-select" id="home-time-selector">
                     <div class="home-filter-btn">
                         <span id="home-time-text">This Month</span>
@@ -122,7 +121,6 @@ export function renderHome() {
 // ============================
 // LOGIKA JAVASCRIPT INTERAKTIF (UNTUK HALAMAN HOME)
 // ============================
-// Fungsi ini akan dipanggil oleh Router saat halaman Home di-render
 export function initHomeLogic() {
     const timeSelector = document.getElementById('home-time-selector');
     const timeSheet = document.getElementById('home-time-sheet');
