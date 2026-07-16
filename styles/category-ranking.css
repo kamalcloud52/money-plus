@@ -115,25 +115,36 @@
 }
 .cr-bar-fill { height: 100%; border-radius: 4px; }
 
-/* --- BOTTOM SHEET --- */
-.bottom-sheet-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    display: flex; align-items: flex-end; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+/* --- BOTTOM SHEET LIST ITEM --- */
+.list-container { display: flex; flex-direction: column; }
+
+.list-item {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding: 16px 0; 
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    background: transparent;
 }
-.bottom-sheet-overlay.open {
-    opacity: 1; pointer-events: auto;
+.list-item:last-child { border-bottom: none; }
+
+/* --- PERBAIKAN LOGIKA CENTANG --- */
+/* 1. Secara default, semua centang DISEMBUNYIKAN */
+.list-item i {
+    display: none !important; 
+    color: #f5a623; 
+    font-size: 18px; 
 }
-.bottom-sheet-content {
-    background: #fff; width: 100%; max-width: 480px;
-    border-radius: 20px 20px 0 0;
-    padding: 20px 20px 40px 20px;
-    transform: translateY(100%); transition: transform 0.3s ease;
+
+/* 2. Hanya item yang memiliki class 'active-item' yang centangnya MUNCUL */
+.list-item.active-item {
+    font-weight: 600; 
+    color: #000; 
 }
-.bottom-sheet-overlay.open .bottom-sheet-content { transform: translateY(0); }
-.bottom-sheet-content h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+.list-item.active-item i {
+    display: block !important;
+}
 
 /* --- GANTI BAGIAN INI --- */
 .list-container { display: flex; flex-direction: column; }
