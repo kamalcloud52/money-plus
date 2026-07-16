@@ -90,6 +90,35 @@
     font-size: 16px; font-weight: 600; margin-bottom: 16px; 
 }
 
+.home-time-sheet .list-item {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding: 16px 0; 
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    background: transparent;
+}
+
+.home-time-sheet .list-item:last-child { border-bottom: none; }
+
+/* --- PERBAIKAN LOGIKA CENTANG --- */
+/* 1. Secara default, semua centang DISEMBUNYIKAN */
+.home-time-sheet .list-item i {
+    display: none !important; 
+    color: #f5a623; 
+    font-size: 18px; 
+}
+
+/* 2. Hanya item yang memiliki class 'active-item' yang centangnya MUNCUL */
+.home-time-sheet .list-item.active-item {
+    font-weight: 600; 
+    color: #000; 
+}
+.home-time-sheet .list-item.active-item i {
+    display: block !important;
+}
+
 /* Hapus background abu-abu, cukup gunakan padding dan border */
 .home-time-sheet .list-item {
     display: flex; 
