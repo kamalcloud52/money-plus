@@ -89,7 +89,6 @@
 .home-time-sheet h3 { 
     font-size: 16px; font-weight: 600; margin-bottom: 16px; 
 }
-
 .home-time-sheet .list-item {
     display: flex; 
     align-items: center; 
@@ -99,8 +98,24 @@
     cursor: pointer;
     background: transparent;
 }
-
 .home-time-sheet .list-item:last-child { border-bottom: none; }
+
+/* LOGIKA CENTANG YANG BENAR (TANPA !important) */
+.home-time-sheet .list-item i {
+    color: #f5a623; 
+    font-size: 18px; 
+    /* Default HILANG: Kita atur opacity 0 dan posisi absolute agar tidak merusak layout */
+    opacity: 0; 
+    transition: opacity 0.2s ease;
+}
+.home-time-sheet .list-item.active-item {
+    font-weight: 600; 
+    color: #000; 
+}
+.home-time-sheet .list-item.active-item i {
+    /* Saat aktif, munculkan */
+    opacity: 1; 
+}
 
 /* --- PERBAIKAN LOGIKA CENTANG --- */
 /* 1. Secara default, semua centang DISEMBUNYIKAN */
