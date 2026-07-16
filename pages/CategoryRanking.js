@@ -180,11 +180,19 @@ export function initCategoryRankingLogic() {
         });
     });
 
+    // 3. Pilih item menu (LOGIKA CENTANG DIPERBAIKI)
     document.querySelectorAll('#cr-time-sheet .list-item').forEach(item => {
         item.addEventListener('click', () => {
             const txt = item.dataset.time;
-            document.querySelector('#cr-time-sheet .active-item')?.classList.remove('active-item');
+            
+            // Hapus class active-item dari semua item (agar centang yang lama hilang)
+            document.querySelectorAll('#cr-time-sheet .list-item').forEach(el => {
+                el.classList.remove('active-item');
+            });
+            
+            // Tambahkan class active-item ke item yang baru diklik
             item.classList.add('active-item');
+
             timePicker.querySelector('span').textContent = txt;
             toggleSheet(timeSheet, false);
         });
