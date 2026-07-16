@@ -145,13 +145,17 @@ export function initHomeLogic() {
         if (e.target === timeSheet) toggleSheet(false);
     });
 
-    // 3. Pilih item menu
+    // 3. Pilih item menu (LOGIKA CENTANG DIPERBAIKI)
     timeSheet.querySelectorAll('.list-item').forEach(item => {
         item.addEventListener('click', () => {
             const txt = item.dataset.time;
             
-            // Update tampilan aktif (centang)
-            timeSheet.querySelector('.active-item')?.classList.remove('active-item');
+            // Hapus class active-item dari semua item (agar centang yang lama hilang)
+            timeSheet.querySelectorAll('.list-item').forEach(el => {
+                el.classList.remove('active-item');
+            });
+            
+            // Tambahkan class active-item ke item yang baru diklik
             item.classList.add('active-item');
             
             // Update teks tombol di Home
