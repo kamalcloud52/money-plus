@@ -1,166 +1,118 @@
-import { dashboardData } from '../api/index.js';
-
-export function renderHome() {
-    const data = dashboardData; 
-
-    return `
-        <div class="app-container home-page">
-            <!-- 1. Financial Statement -->
-            <div class="card financial-statement">
-                <div class="card-header">
-                    <h3>Financial Statement</h3>
-                    <a href="#financial-statement" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="balance">${data.balance}</div>
-            </div>
-
-            <!-- 2. Expense & Income -->
-            <div class="card expense-income">
-                <div class="card-header">
-                    <h3>Expense & Income</h3>
-                    <a href="#category-ranking" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="filter-select" id="home-time-selector">
-                    <div class="home-filter-btn">
-                        <span id="home-time-text">This Month</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-
-                <div class="chart-container">
-                    <div class="chart-labels">
-                        <span>IDR30L</span>
-                        <span>IDR20L</span>
-                    </div>
-                    <div class="chart-bars">
-                        <div class="chart-bar bar-income"></div>
-                        <div class="chart-bar bar-expense"></div>
-                    </div>
-                    <div class="chart-data">
-                        <div class="row">
-                            <span>Income:</span>
-                            <span class="text-green">IDR${data.chart.income.toLocaleString()}</span>
-                        </div>
-                        <div class="row">
-                            <span>Expense:</span>
-                            <span class="text-red">IDR-${data.chart.expense.toLocaleString()}</span>
-                        </div>
-                        <div class="row" style="border-top: 1px solid #f2f2f2; border-bottom: none; margin-top: 2px;">
-                            <span>Total:</span>
-                            <span class="text-red">IDR-${(data.chart.expense - data.chart.income).toLocaleString()}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Monthly Budget -->
-            <div class="card monthly-budget">
-                <div class="card-header">
-                    <h3>Monthly Budget</h3>
-                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="budget-container">
-                    <div class="donut-chart">
-                        <div class="donut-inner">
-                            <span>Remaining</span>
-                            <strong>${data.budget.percentage}%</strong>
-                        </div>
-                    </div>
-                    <div class="budget-data">
-                        <div class="row flex-row">
-                            <span>Budget</span>
-                            <span class="text-green fw-bold">IDR${data.budget.total.toLocaleString()}</span>
-                        </div>
-                        <div class="row flex-row">
-                            <span>Expenses</span>
-                            <span class="text-red">IDR${data.budget.expenses.toLocaleString()}</span>
-                        </div>
-                        <div class="row flex-row">
-                            <span>Remaining</span>
-                            <span class="text-green fw-bold">IDR${data.budget.remaining.toLocaleString()}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Recent Transactions -->
-            <div class="card recent-transactions">
-                <div class="card-header">
-                    <h3>Recent Transactions</h3>
-                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
-                </div>
-                ${data.transactions.map(t => `
-                    <div class="transaction-item">
-                        <div class="trans-icon ${t.color}"><i class="fas fa-${t.icon}"></i></div>
-                        <div class="trans-details">
-                            <h4>${t.title}</h4>
-                            <p>${t.desc}</p>
-                        </div>
-                        <div class="trans-amount">${t.amount.toLocaleString()}</div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-
-        <!-- ===== BOTTOM SHEET HOME (THIS MONTH) ===== -->
-        <div class="bottom-sheet-overlay home-time-sheet" id="home-time-sheet">
-            <div class="bottom-sheet-content">
-                <h3>Select Time</h3>
-                <div class="list-container">
-                    <div class="list-item" data-time="Today">Today</div>
-                    <div class="list-item" data-time="This Week">This Week</div>
-                    <div class="list-item active-item" data-time="This Month">This Month <i class="fas fa-check"></i></div>
-                    <div class="list-item" data-time="This Year">This Year</div>
-                </div>
-            </div>
-        </div>
-    `;
+/* Financial Statement */
+.financial-statement .balance {
+    text-align: center;
+    font-size: 24px; font-weight: 700; color: #4cd964;
+    padding: 10px 0;
 }
 
-// ============================
-// LOGIKA JAVASCRIPT INTERAKTIF
-// ============================
-export function initHomeLogic() {
-    const timeSelector = document.getElementById('home-time-selector');
-    const timeSheet = document.getElementById('home-time-sheet');
-    const timeText = document.getElementById('home-time-text');
+/* --- TOMBOL FILTER THIS MONTH DI HOME --- */
+.filter-select {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    if (!timeSelector || !timeSheet) return;
+.home-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid #f5a623;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+.home-filter-btn i {
+    font-size: 12px;
+    color: #f5a623;
+}
 
-    const toggleSheet = (show) => {
-        if (show) {
-            timeSheet.classList.add('open');
-        } else {
-            timeSheet.classList.remove('open');
-        }
-    };
+/* Expense & Income Chart */
+.chart-container { display: flex; align-items: flex-end; gap: 12px; padding-bottom: 4px; height: 90px; }
+.chart-labels { display: flex; flex-direction: column; justify-content: space-between; height: 100%; font-size: 10px; color: #8e8e93; }
+.chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 100%; margin-right: 16px; }
+.chart-bar { width: 24px; border-radius: 4px 4px 0 0; }
+.bar-income { height: 6px; background-color: #4cd964; }
+.bar-expense { height: 80px; background-color: #ff3b30; }
 
-    timeSelector.addEventListener('click', () => toggleSheet(true));
+.chart-data { flex: 1; }
+.chart-data .row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
+.chart-data .row:last-child { border-bottom: none; }
+.chart-data .row span:first-child { color: #333; }
 
-    timeSheet.addEventListener('click', (e) => {
-        if (e.target === timeSheet) toggleSheet(false);
-    });
+/* Monthly Budget */
+.budget-container { display: flex; align-items: center; gap: 20px; }
+.donut-chart {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: conic-gradient(#4cd964 0% 7.2%, #e5e5ea 7.2% 100%);
+    display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
+}
+.donut-inner {
+    width: 70px; height: 70px; background: #fff; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 10px; color: #8e8e93;
+}
+.donut-inner strong { color: #4cd964; font-size: 12px; }
+.budget-data { flex: 1; font-size: 14px; }
+.budget-data .row { padding: 4px 0; }
+.budget-data .row span:first-child { color: #8e8e93; }
 
-    // --- PERBAIKAN LOGIKA PILIHAN ---
-    timeSheet.querySelectorAll('.list-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const txt = item.dataset.time;
-            
-            // 1. Logika Hapus Class (untuk memastikan tidak ada class aktif ganda)
-            timeSheet.querySelectorAll('.list-item').forEach(el => {
-                el.classList.remove('active-item');
-            });
-            
-            // 2. Tambahkan Class ke item yang baru diklik.
-            // KITA PASTIKAN ITEM INI BENAR-BENAR DAPAT CLASS NYA
-            item.classList.add('active-item');
+/* Recent Transactions */
+.transaction-item { background: #f9f9f9; border-radius: 10px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; }
+.transaction-item:last-child { margin-bottom: 0; }
+.trans-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 14px; color: #fff; font-size: 18px; flex-shrink: 0; }
+.bg-orange { background: #ffcd5c; }
+.bg-gray { background: #a4aab3; }
+.bg-pink { background: #ff7a9e; }
+.trans-details { flex: 1; }
+.trans-details h4 { font-size: 14px; color: #333; font-weight: 600; }
+.trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
+.trans-amount { font-size: 14px; color: #ff3b30; }
 
-            // 3. Update teks tombol
-            timeText.textContent = txt;
-            
-            // 4. Tutup
-            toggleSheet(false);
-        });
-    });
+
+/* ========================================================= */
+/* --- BOTTOM SHEET UNTUK HOME (THIS MONTH) --- */
+/* ========================================================= */
+.home-time-sheet .bottom-sheet-content {
+    background: #fff; 
+    width: 100%; 
+    max-width: 480px;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 40px 20px;
+    transform: translateY(100%); 
+    transition: transform 0.3s ease;
+}
+.home-time-sheet.open .bottom-sheet-content {
+    transform: translateY(0);
+}
+.home-time-sheet h3 { 
+    font-size: 16px; font-weight: 600; margin-bottom: 16px; 
+}
+.home-time-sheet .list-item {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding: 16px 0; 
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    background: transparent;
+}
+.home-time-sheet .list-item:last-child { border-bottom: none; }
+
+/* LOGIKA CENTANG (Opacity) */
+.home-time-sheet .list-item i {
+    color: #f5a623; 
+    font-size: 18px; 
+    opacity: 0; /* Default hilang */
+    transition: opacity 0.2s ease;
+}
+.home-time-sheet .list-item.active-item {
+    font-weight: 600; 
+    color: #000; 
+}
+.home-time-sheet .list-item.active-item i {
+    opacity: 1; /* Muncul saat aktif */
 }
