@@ -129,20 +129,27 @@
 .bottom-sheet-content {
     background: #fff; width: 100%; max-width: 480px;
     border-radius: 20px 20px 0 0;
-    padding: 20px; padding-bottom: 40px;
+    padding: 20px 20px 40px 20px;
     transform: translateY(100%); transition: transform 0.3s ease;
 }
 .bottom-sheet-overlay.open .bottom-sheet-content { transform: translateY(0); }
 .bottom-sheet-content h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
-.list-container { display: flex; flex-direction: column; gap: 8px; }
+
+/* --- GANTI BAGIAN INI --- */
+.list-container { display: flex; flex-direction: column; }
 .list-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding: 16px 0; 
+    border-bottom: 1px solid #f0f0f0; /* Garis pemisah tipis */
+    cursor: pointer;
+    background: transparent; /* Tidak ada background abu-abu */
 }
 .list-item:last-child { border-bottom: none; }
 .list-item.active-item { font-weight: 600; color: #000; }
 .list-item.active-item i { display: block !important; }
-.list-item i { display: none; color: #f5a623; font-size: 16px; }
+.list-item i { display: none; color: #f5a623; font-size: 18px; }
 
 /* --- MONTH LIST CALENDAR --- */
 .month-row {
