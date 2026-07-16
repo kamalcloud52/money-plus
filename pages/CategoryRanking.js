@@ -55,7 +55,6 @@ export function renderCategoryRanking() {
             const displayAmount = isExpense ? `-${formatRupiah(item.amount)}` : formatRupiah(item.amount);
             const colorClass = isExpense ? 'text-red' : 'text-green';
             
-            // Dapatkan ikon font-awesome berdasarkan nama
             let iconClass = 'fa-tag';
             if(item.name === 'Shopping') iconClass = 'fa-shopping-cart';
             else if(item.name === 'Repair') iconClass = 'fa-tools';
@@ -84,26 +83,20 @@ export function renderCategoryRanking() {
     return `
         <div class="app-container category-ranking-page">
             
-            <!-- Header (Struktur 3 Kolom: Kiri, Tengah, Kanan) -->
+            <!-- Header -->
             <div class="cr-header-top">
-                <!-- KIRI: Back Button -->
                 <button class="back-btn" id="cr-back-btn"><i class="fas fa-chevron-left"></i></button>
-                
-                <!-- TENGAH: Time Selector -->
                 <div class="cr-center-actions">
                     <div class="cr-time-selector" id="cr-time-picker">
                         <span>This Month</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
-
-                <!-- KANAN: Calendar Icon -->
                 <button class="cr-calendar-btn" id="cr-calendar-btn">
                     <i class="far fa-calendar-alt"></i>
                 </button>
             </div>
 
-            <!-- Tabs -->
             <div class="cr-tabs" id="cr-tabs-container">
                 <button class="cr-tab-btn active" data-type="expense">Expense</button>
                 <button class="cr-tab-btn" data-type="income">Income</button>
@@ -127,19 +120,20 @@ export function renderCategoryRanking() {
             </div>
         </div>
 
-        <!-- Bottom Sheets -->
+        <!-- ===== BOTTOM SHEET: SELECT TIME ===== -->
         <div class="bottom-sheet-overlay" id="cr-time-sheet">
             <div class="bottom-sheet-content">
                 <h3>Select Time</h3>
                 <div class="list-container">
                     <div class="list-item" data-time="Today">Today</div>
                     <div class="list-item" data-time="This Week">This Week</div>
-                    <div class="list-item active-item" data-time="This Month">This Month <i class="fas fa-check" style="color:#f5a623; margin-left:auto;"></i></div>
+                    <div class="list-item active-item" data-time="This Month">This Month <i class="fas fa-check"></i></div>
                     <div class="list-item" data-time="This Year">This Year</div>
                 </div>
             </div>
         </div>
 
+        <!-- ===== BOTTOM SHEET: CALENDAR MONTHLY ===== -->
         <div class="bottom-sheet-overlay" id="cr-calendar-sheet">
             <div class="bottom-sheet-content" style="max-height: 80vh; overflow-y: auto;">
                 <h3 style="margin-bottom: 12px;">2026</h3>
