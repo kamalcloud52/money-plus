@@ -103,7 +103,7 @@ export function renderHome() {
             </div>
         </div>
 
-        <!-- ===== BOTTOM SHEET HOME (THIS MONTH) ===== -->
+        <!-- ===== BOTTOM SHEET HOME ===== -->
         <div class="bottom-sheet-overlay home-time-sheet" id="home-time-sheet">
             <div class="bottom-sheet-content">
                 <h3>Select Time</h3>
@@ -119,7 +119,7 @@ export function renderHome() {
 }
 
 // ============================
-// LOGIKA JAVASCRIPT INTERAKTIF
+// LOGIKA INTERAKTIF FINAL
 // ============================
 export function initHomeLogic() {
     const timeSelector = document.getElementById('home-time-selector');
@@ -129,11 +129,7 @@ export function initHomeLogic() {
     if (!timeSelector || !timeSheet) return;
 
     const toggleSheet = (show) => {
-        if (show) {
-            timeSheet.classList.add('open');
-        } else {
-            timeSheet.classList.remove('open');
-        }
+        timeSheet.classList.toggle('open', show);
     };
 
     timeSelector.addEventListener('click', () => toggleSheet(true));
@@ -142,21 +138,20 @@ export function initHomeLogic() {
         if (e.target === timeSheet) toggleSheet(false);
     });
 
-    // --- PERBAIKAN LOGIKA PILIHAN ---
+    // LOGIKA PALING AMAN
     timeSheet.querySelectorAll('.list-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const txt = item.dataset.time;
+        item.addEventListener('click', function() {
+            const txt = this.dataset.time;
             
-            // 1. Logika Hapus Class (untuk memastikan tidak ada class aktif ganda)
+            // 1. Hapus centang dari semua
             timeSheet.querySelectorAll('.list-item').forEach(el => {
                 el.classList.remove('active-item');
             });
             
-            // 2. Tambahkan Class ke item yang baru diklik.
-            // KITA PASTIKAN ITEM INI BENAR-BENAR DAPAT CLASS NYA
-            item.classList.add('active-item');
+            // 2. Beri centang ke yang diklik
+            this.classList.add('active-item');
 
-            // 3. Update teks tombol
+            // 3. Update teks
             timeText.textContent = txt;
             
             // 4. Tutup
