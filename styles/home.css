@@ -73,17 +73,13 @@
 .trans-details p { font-size: 12px; color: #8e8e93; margin-top: 2px; }
 .trans-amount { font-size: 14px; color: #ff3b30; }
 
-
-/* ========================================================= */
 /* --- BOTTOM SHEET UNTUK HOME (THIS MONTH) --- */
-/* ========================================================= */
 .home-time-sheet .bottom-sheet-content {
     background: #fff; 
     width: 100%; 
     max-width: 480px;
     border-radius: 20px 20px 0 0;
-    padding: 20px; 
-    padding-bottom: 40px;
+    padding: 20px 20px 40px 20px;
     transform: translateY(100%); 
     transition: transform 0.3s ease;
 }
@@ -93,11 +89,29 @@
 .home-time-sheet h3 { 
     font-size: 16px; font-weight: 600; margin-bottom: 16px; 
 }
+
+/* Hapus background abu-abu, cukup gunakan padding dan border */
 .home-time-sheet .list-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding: 16px 0; 
+    border-bottom: 1px solid #f0f0f0; /* Garis pemisah tipis */
+    cursor: pointer;
+    background: transparent; /* Tidak ada background */
 }
-.home-time-sheet .list-item:last-child { border-bottom: none; }
-.home-time-sheet .list-item.active-item { font-weight: 600; color: #000; }
-.home-time-sheet .list-item.active-item i { display: block !important; }
-.home-time-sheet .list-item i { display: none; color: #f5a623; font-size: 16px; }
+.home-time-sheet .list-item:last-child { 
+    border-bottom: none; /* Item terakhir tidak punya garis bawah */
+}
+.home-time-sheet .list-item.active-item { 
+    font-weight: 600; 
+    color: #000; 
+}
+.home-time-sheet .list-item.active-item i { 
+    display: block !important; /* Tampilkan centang jika aktif */
+}
+.home-time-sheet .list-item i { 
+    display: none; /* Sembunyikan centang jika tidak aktif */
+    color: #f5a623; 
+    font-size: 18px; 
+}
