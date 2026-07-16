@@ -2,7 +2,7 @@
 .financial-statement-page {
     position: relative;
     z-index: 1;
-    background-color: #ffffff !important; /* Putih bersih seperti halaman Transaction */
+    background-color: #ffffff !important;
     margin: 0 !important;
     padding-top: 0 !important;
     padding-bottom: 20px;
@@ -30,14 +30,21 @@
     background: none; border: none; font-size: 18px; cursor: pointer; color: #000; padding: 0;
 }
 
-/* Card Total Saldo */
+/* ========================================================= */
+/* PERBAIKAN UTAMA: CARD TOTAL SALDO JADI TENGAH VERTIKAL */
+/* ========================================================= */
 .fs-total-card {
     margin: 0 16px 24px 16px;
     border: 1px solid #f5a623;
     border-radius: 12px;
     padding: 16px;
-    text-align: center;
     background: #fff;
+    
+    /* Gunakan Flexbox agar teks benar-benar di tengah */
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    min-height: 64px; /* Beri tinggi minimal agar proporsional */
 }
 .fs-total-text {
     font-size: 20px;
