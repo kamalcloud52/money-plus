@@ -4,6 +4,7 @@ import { renderGraph } from '../pages/Graph.js';
 import { renderTransaction, initTransactionLogic } from '../pages/Transaction.js';
 import { renderFinancialStatement } from '../pages/FinancialStatement.js';
 import { renderCategoryRanking, initCategoryRankingLogic } from '../pages/CategoryRanking.js';
+import { renderBudget, initBudgetLogic } from '../pages/Budget.js';
 import { renderSettings } from '../pages/Settings.js';
 
 const routes = {
@@ -13,6 +14,7 @@ const routes = {
     'transaction': renderTransaction,
     'financial-statement': renderFinancialStatement,
     'category-ranking': renderCategoryRanking,
+    'budget': renderBudget,
     'settings': renderSettings
 };
 
@@ -44,6 +46,9 @@ export function initRouter() {
             }
             if (hash === 'category-ranking') {
                 initCategoryRankingLogic();
+            }
+            if (hash === 'budget') {
+                initBudgetLogic();
             }
         }
 
