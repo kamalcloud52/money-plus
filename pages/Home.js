@@ -58,7 +58,7 @@ export function renderHome() {
             <div class="card monthly-budget">
                 <div class="card-header">
                     <h3>Monthly Budget</h3>
-                    <a href="#graph" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
+                    <a href="#budget" class="arrow-icon"><i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="budget-container">
                     <div class="donut-chart">
