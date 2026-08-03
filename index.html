@@ -2,23 +2,24 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UangPlus - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Money Plus</title>
+    <!-- Panggil CSS Eksternal -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome (via CDN, karena ini icon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Panggil CSS yang sudah dipisah -->
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/home.css">
-    <link rel="stylesheet" href="styles/wallet.css">
-    <link rel="stylesheet" href="styles/graph.css">
-    <link rel="stylesheet" href="styles/transaction.css">
-    <link rel="stylesheet" href="styles/financial-statement.css">
-    <link rel="stylesheet" href="styles/category-ranking.css">
-    <link rel="stylesheet" href="styles/budget.css">
 </head>
 <body>
-    <div id="app"></div>
-    
-    <script type="module" src="app.js"></script>
+    <!-- Container Aplikasi SPA -->
+    <div id="app" class="app-container">
+        <!-- Render akan diinjeksi oleh JS di sini -->
+    </div>
+
+    <!-- Panggil JS Utama & Pages -->
+    <script src="pages/Dashboard.js"></script>
+    <script src="pages/Transactions.js"></script>
+    <script src="pages/Budget.js"></script>
+    <script src="pages/Settings.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
